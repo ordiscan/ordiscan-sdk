@@ -1,0 +1,8 @@
+{
+  "name": "ordiscan",
+  "version": "0.0.1",
+  "description": "A wrapper for Ordiscan's API",
+  "main": "index.js",
+  "author": "t4t5",
+  "license": "ISC"
+}

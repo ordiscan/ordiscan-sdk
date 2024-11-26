@@ -1,8 +1,34 @@
 {
   "name": "ordiscan",
-  "version": "0.0.1",
-  "description": "A wrapper for Ordiscan's API",
-  "main": "index.js",
+  "version": "0.1.0",
+  "description": "TypeScript client for the Ordiscan API",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint src --ext .ts",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "ordinals",
+    "bitcoin",
+    "ordiscan",
+    "api"
+  ],
   "author": "t4t5",
-  "license": "ISC"
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "@typescript-eslint/parser": "^5.0.0",
+    "eslint": "^8.0.0",
+    "typescript": "^4.9.0"
+  },
+  "engines": {
+    "node": ">=14"
+  }
 }

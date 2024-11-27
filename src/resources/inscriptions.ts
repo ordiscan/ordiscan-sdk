@@ -35,10 +35,17 @@ export class Inscriptions extends BaseResource {
    * List inscriptions with pagination
    */
   async list({
+    address,
     after,
     limit = 20,
-  }: { after?: string; limit?: number } = {}): Promise<Inscription[]> {
+  }: { address?: string; after?: string; limit?: number } = {}): Promise<
+    Inscription[]
+  > {
     const params = new URLSearchParams();
+
+    if (address) {
+      params.append("address", address);
+    }
 
     if (after) {
       params.append("after", after);

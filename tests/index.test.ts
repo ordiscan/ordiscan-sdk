@@ -7,7 +7,7 @@ const ordiscan = new Ordiscan({
   baseUrl: process.env.ORDISCAN_BASE_URL || "",
 });
 
-test("list inscriptions", async () => {
+test("list all inscriptions", async () => {
   const inscriptions = await ordiscan.inscriptions.list();
 
   expect(inscriptions.length).toBe(100);
@@ -17,7 +17,15 @@ test("list inscriptions", async () => {
   );
 });
 
-test("succeed to get valid inscription", async () => {
+test("list all inscriptions by address", async () => {
+  const inscriptions = await ordiscan.inscriptions.list({
+    address: "bc1pr8vjq0fk89f5sw3r4n9scrasvw7kaud9akhzw57c3ygycsjspvvseyjcma",
+  });
+
+  expect(inscriptions.length).toBe(0);
+});
+
+test("succeed to get inscription by ID", async () => {
   const inscription = await ordiscan.inscriptions.get({
     inscriptionId:
       "aa063cd70a4d526d2a3f0d7b1bc7328dd42de6e86b73c1c95785dfc2ac99e060i0",

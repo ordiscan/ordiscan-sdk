@@ -1,4 +1,9 @@
-import { ApiVersion, OrdiscanConfig, OrdiscanError } from "./types";
+import {
+  ApiVersion,
+  ErrResponse,
+  OrdiscanConfig,
+  OrdiscanError,
+} from "./types";
 import { Inscriptions } from "./resources/inscriptions";
 
 const DEFAULT_BASE_URL = "https://api.ordiscan.com/v1";
@@ -37,10 +42,13 @@ export class Ordiscan {
     });
 
     if (!response.ok) {
+      const err = await (response.json() as Promise<ErrResponse>).catch(
+        () => null,
+      );
+
       throw new OrdiscanError(
-        `HTTP error! status: ${response.status}`,
+        err?.error.message || "Request failed!",
         response.status,
-        await response.json().catch(() => null),
       );
     }
 

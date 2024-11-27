@@ -6,6 +6,12 @@ export interface OrdiscanConfig {
   version?: ApiVersion;
 }
 
+export interface ErrResponse {
+  error: {
+    message: string;
+  };
+}
+
 export class OrdiscanError extends Error {
   constructor(
     message: string,

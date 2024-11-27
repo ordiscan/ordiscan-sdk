@@ -1,31 +1,22 @@
 import { BaseResource } from "./base";
 
-export interface InscriptionResponse {
-  id: string;
-  number: number;
-  address: string;
-  output: string;
-  value: string;
-  height: number;
-  fee: string;
-  sat: string;
+export interface Inscription {
+  inscription_id: string;
+  inscription_number: number;
   content_type: string;
-  timestamp: number;
-  genesis_timestamp: number;
-  genesis_height: number;
-  genesis_fee: string;
+  owner_address: string;
+  owner_output: string;
   genesis_address: string;
-  content_length: number;
-  content: string;
-}
-
-export interface ListInscriptionsParams {
-  after?: string;
-  limit?: number;
-}
-
-export interface GetInscriptionParams {
-  inscriptionId: string;
+  genesis_output: string;
+  timestamp: string;
+  metadata: null; // TODO
+  metaprotocol: string | null;
+  sat: number;
+  content_url: string;
+  parent_inscription_id: string | null;
+  delegate_inscription_id: string | null;
+  satributes: []; // TODO
+  submodules: []; // TODO
 }
 
 export class Inscriptions extends BaseResource {
@@ -34,26 +25,28 @@ export class Inscriptions extends BaseResource {
    */
   async get({
     inscriptionId,
-  }: GetInscriptionParams): Promise<InscriptionResponse> {
-    return this.client.fetch<InscriptionResponse>(
-      `/inscription/${inscriptionId}`,
-    );
+  }: {
+    inscriptionId: string;
+  }): Promise<Inscription> {
+    return this.client.fetch<Inscription>(`/inscription/${inscriptionId}`);
   }
 
   /**
    * List inscriptions with pagination
    */
-  async list({ after, limit = 20 }: ListInscriptionsParams = {}): Promise<
-    InscriptionResponse[]
-  > {
+  async list({
+    after,
+    limit = 20,
+  }: { after?: string; limit?: number } = {}): Promise<Inscription[]> {
     const params = new URLSearchParams();
+
     if (after) {
       params.append("after", after);
     }
 
     params.append("limit", limit.toString());
 
-    return this.client.fetch<InscriptionResponse[]>(
+    return this.client.fetch<Inscription[]>(
       `/inscriptions?${params.toString()}`,
     );
   }

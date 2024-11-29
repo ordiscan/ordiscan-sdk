@@ -1,7 +1,7 @@
 import { Ordiscan } from "../client";
 import { Inscription } from "./inscriptions";
 
-type Satribute =
+export type Satribute =
   | "UNCOMMON"
   | "RARE"
   | "EPIC"

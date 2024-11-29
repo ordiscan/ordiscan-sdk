@@ -39,6 +39,10 @@ export class Ordiscan {
       ...options.headers,
     };
 
+    if (process.env.NODE_ENV === "test") {
+      console.log("➡️", options.method || "GET", url);
+    }
+
     const response = await fetch(url, {
       ...options,
       headers,

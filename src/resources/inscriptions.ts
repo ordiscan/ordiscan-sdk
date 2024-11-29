@@ -1,3 +1,4 @@
+import { Satribute } from "./address";
 import { BaseResource } from "./base";
 
 export interface Inscription {
@@ -15,8 +16,8 @@ export interface Inscription {
   content_url: string;
   parent_inscription_id: string | null;
   delegate_inscription_id: string | null;
-  satributes: []; // TODO
-  submodules: []; // TODO
+  satributes: Satribute[];
+  submodules: string[];
 }
 
 export class Inscriptions extends BaseResource {

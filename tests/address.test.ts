@@ -1,18 +1,15 @@
 import { expect, test } from "vitest";
-import nock from "nock";
 
-import { ordiscan } from "./utils";
+import { mock, ordiscan } from "./utils";
 import { MOCK_INSCRIPTION } from "./mocks/inscription";
 
 const ADDRESS =
   "bc1plcx7gv8a48479e5ut4zg2c23q8cuptzxuhzqw5mjqx3qxn855nhqexy4g3";
 
 test("list all inscriptions from address", async () => {
-  nock("http://localhost:3000")
-    .get(`/v1/address/${ADDRESS}/inscriptions`)
-    .reply(200, {
-      data: [MOCK_INSCRIPTION],
-    });
+  mock(`/address/${ADDRESS}/inscriptions`).reply(200, {
+    data: [MOCK_INSCRIPTION],
+  });
 
   const inscriptions = await ordiscan.address(ADDRESS).inscriptions();
 

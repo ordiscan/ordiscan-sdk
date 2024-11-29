@@ -1,11 +1,5 @@
 import { expect, test } from "vitest";
-
-import { Ordiscan } from "../src";
-
-const ordiscan = new Ordiscan({
-  auth: process.env.ORDISCAN_ACCESS_TOKEN || "",
-  baseUrl: process.env.ORDISCAN_BASE_URL || "",
-});
+import { ordiscan } from "./utils";
 
 test("list all inscriptions", async () => {
   const inscriptions = await ordiscan.inscriptions.list();

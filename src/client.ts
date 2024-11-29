@@ -5,6 +5,7 @@ import {
   OrdiscanError,
 } from "./types";
 import { Inscriptions } from "./resources/inscriptions";
+import { Address } from "./resources/address";
 
 const DEFAULT_BASE_URL = "https://api.ordiscan.com/v1";
 
@@ -14,6 +15,7 @@ export class Ordiscan {
   private readonly version: ApiVersion;
 
   public readonly inscriptions: Inscriptions;
+  public readonly address: (address: string) => Address;
 
   constructor(config: OrdiscanConfig) {
     this.auth = config.auth;
@@ -22,6 +24,7 @@ export class Ordiscan {
 
     // Initialize resources
     this.inscriptions = new Inscriptions(this);
+    this.address = (address: string) => new Address(this, address);
   }
 
   private get apiUrl(): string {

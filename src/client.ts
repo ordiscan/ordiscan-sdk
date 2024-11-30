@@ -6,6 +6,7 @@ import {
 } from "./types";
 import { Inscriptions } from "./resources/inscriptions";
 import { Address } from "./resources/address";
+import { Tx } from "./resources/tx";
 
 const DEFAULT_BASE_URL = "https://api.ordiscan.com/v1";
 
@@ -16,6 +17,7 @@ export class Ordiscan {
 
   public readonly inscriptions: Inscriptions;
   public readonly address: (address: string) => Address;
+  public readonly tx: (txid: string) => Tx;
 
   constructor(config: OrdiscanConfig) {
     this.auth = config.auth;
@@ -25,6 +27,7 @@ export class Ordiscan {
     // Initialize resources
     this.inscriptions = new Inscriptions(this);
     this.address = (address: string) => new Address(this, address);
+    this.tx = (txid: string) => new Tx(this, txid);
   }
 
   private get apiUrl(): string {

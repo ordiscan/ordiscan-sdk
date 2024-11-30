@@ -2,9 +2,9 @@ import { expect, test } from "vitest";
 
 import { mock, ordiscan } from "./utils";
 import { MOCK_INSCRIPTION } from "./mocks/inscription";
-import { RUNE_BALANCE } from "./mocks/rune";
-import { BRC20_BALANCE } from "./mocks/brc20";
-import { RARE_SAT_BALANCE } from "./mocks/rareSat";
+import { MOCK_RUNE_BALANCE } from "./mocks/rune";
+import { MOCK_BRC20_BALANCE } from "./mocks/brc20";
+import { MOCK_RARE_SAT_BALANCE } from "./mocks/rareSat";
 
 const ADDRESS =
   "bc1plcx7gv8a48479e5ut4zg2c23q8cuptzxuhzqw5mjqx3qxn855nhqexy4g3";
@@ -22,7 +22,7 @@ test("list all inscriptions from address", async () => {
 
 test("list all rune balances from address", async () => {
   mock(`/address/${ADDRESS}/runes`).reply(200, {
-    data: [RUNE_BALANCE],
+    data: [MOCK_RUNE_BALANCE],
   });
 
   const runeBalances = await ordiscan.address(ADDRESS).runes();
@@ -33,7 +33,7 @@ test("list all rune balances from address", async () => {
 
 test("list all BRC-20 balances from address", async () => {
   mock(`/address/${ADDRESS}/brc20`).reply(200, {
-    data: [BRC20_BALANCE],
+    data: [MOCK_BRC20_BALANCE],
   });
 
   const brc20Balances = await ordiscan.address(ADDRESS).brc20();
@@ -44,7 +44,7 @@ test("list all BRC-20 balances from address", async () => {
 
 test("list all rare sats from address", async () => {
   mock(`/address/${ADDRESS}/rare-sats`).reply(200, {
-    data: [RARE_SAT_BALANCE],
+    data: [MOCK_RARE_SAT_BALANCE],
   });
 
   const rareSatBalances = await ordiscan.address(ADDRESS).rareSats();

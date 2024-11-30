@@ -23,17 +23,17 @@ export type Satribute =
   | "ALPHA"
   | "OMEGA";
 
-interface RuneBalance {
+export interface RuneBalance {
   name: string;
   balance: string;
 }
 
-interface Brc20Balance {
+export interface Brc20Balance {
   tick: string;
   balance: number;
 }
 
-interface SatributeBalance {
+export interface SatributeBalance {
   satributes: Satribute[];
   ranges: [number, number][];
 }

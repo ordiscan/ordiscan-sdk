@@ -1,5 +1,33 @@
-import { RuneBalance } from "../../src/resources/address";
-import { RunicTx } from "../../src/resources/tx";
+import { type RuneBalance } from "../../src/resources/address";
+import { type RunicTx } from "../../src/resources/tx";
+import { type RuneInfo, type RuneMarketInfo } from "../../src/resources/rune";
+
+export const MOCK_RUNE_INFO: RuneInfo = {
+  id: "1:0",
+  name: "UNCOMMONGOODS",
+  formatted_name: "UNCOMMON•GOODS",
+  spacers: 128,
+  number: 0,
+  inscription_id: null,
+  decimals: 0,
+  mint_count_cap: "340282366920938463463374607431768211455",
+  symbol: "⧉",
+  etching_txid: null,
+  amount_per_mint: "1",
+  timestamp_unix: "0",
+  premined_supply: "0",
+  mint_start_block: 840000,
+  mint_end_block: 1050000,
+  current_supply: "36303629",
+  current_mint_count: 36303629,
+};
+
+export const MOCK_RUNE_MARKET_INFO: RuneMarketInfo = {
+  price_in_sats: 12.38,
+  price_in_usd: 0.00878,
+  market_cap_in_btc: 12380,
+  market_cap_in_usd: 878001980,
+};
 
 export const MOCK_RUNE_BALANCE: RuneBalance = {
   name: "RSICGENESISRUNE",

@@ -1,27 +1,6 @@
 import { Ordiscan } from "../client";
 import { Inscription } from "./inscriptions";
-
-export type Satribute =
-  | "UNCOMMON"
-  | "RARE"
-  | "EPIC"
-  | "LEGENDARY"
-  | "MYTHIC"
-  | "BLACK_UNCOMMON"
-  | "BLACK_RARE"
-  | "BLACK_EPIC"
-  | "BLACK_LEGENDARY"
-  | "BLACK_MYTHIC"
-  | "BLOCK_9"
-  | "BLOCK_78"
-  | "NAKAMOTO"
-  | "FIRST_TX"
-  | "VINTAGE"
-  | "PIZZA"
-  | "HITMAN"
-  | "PALINDROME"
-  | "ALPHA"
-  | "OMEGA";
+import { Satribute } from "./sats";
 
 export interface RuneBalance {
   name: string;

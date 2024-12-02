@@ -5,6 +5,19 @@ import { mock, ordiscan } from "./utils";
 
 const RUNE_NAME = "UNCOMMONGOODS";
 
+test("list runes", async () => {
+  mock(`/runes?sort=oldest`).reply(200, {
+    data: [MOCK_RUNE_INFO],
+  });
+
+  const runes = await ordiscan.runes.list({
+    sort: "oldest",
+  });
+
+  expect(runes.length).toBe(1);
+  expect(runes[0].name).toBeTypeOf("string");
+});
+
 test("get rune info", async () => {
   mock(`/rune/${RUNE_NAME}`).reply(200, {
     data: MOCK_RUNE_INFO,

@@ -16,6 +16,8 @@ export interface RuneInfo {
   premined_supply: string;
   mint_start_block: number;
   mint_end_block: number;
+
+  // TODO: these don't exist in list
   current_supply: string;
   current_mint_count: number;
 }

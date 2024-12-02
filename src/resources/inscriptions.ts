@@ -1,4 +1,4 @@
-import { Satribute } from "./address";
+import { Satribute } from "./sats";
 import { BaseResource } from "./base";
 
 export interface Inscription {

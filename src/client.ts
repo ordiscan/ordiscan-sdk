@@ -9,6 +9,7 @@ import { Address } from "./resources/address";
 import { Tx } from "./resources/tx";
 import { Rune } from "./resources/rune";
 import { Sats } from "./resources/sats";
+import { Runes } from "./resources/runes";
 
 const DEFAULT_BASE_URL = "https://api.ordiscan.com/v1";
 
@@ -22,6 +23,7 @@ export class Ordiscan {
   public readonly rune: (name: string) => Rune;
 
   public readonly inscriptions: Inscriptions;
+  public readonly runes: Runes;
   public readonly sats: Sats;
 
   constructor(config: OrdiscanConfig) {
@@ -35,6 +37,7 @@ export class Ordiscan {
     this.rune = (name: string) => new Rune(this, name);
 
     this.inscriptions = new Inscriptions(this);
+    this.runes = new Runes(this);
     this.sats = new Sats(this);
   }
 

@@ -38,6 +38,26 @@ export interface InscriptionTransfer {
   timestamp: string; // TODO: change to date?
 }
 
+export interface InscriptionActivity {
+  txid: string;
+  type: "INSCRIBE" | "RECEIVE" | "SEND";
+  inscription_id: string;
+  counterpart_address: string | null;
+  spent_as_fee: boolean;
+  confirmed: boolean;
+  timestamp: string;
+}
+
+export interface Brc20Activity {
+  ticker: string;
+  type: "TRANSFER" | "MINT" | "DEPLOY";
+  from_address: string | null;
+  to_address: string | null;
+  amount: number;
+  inscription_id: string;
+  timestamp: string;
+}
+
 export interface TxInfo {
   txid: string;
   fee: number;

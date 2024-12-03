@@ -1,4 +1,5 @@
 import { Inscription } from "../../src/resources/inscriptions";
+import { InscriptionActivity } from "../../src/resources/tx";
 
 export const MOCK_INSCRIPTION: Inscription = {
   inscription_id:
@@ -25,4 +26,15 @@ export const MOCK_INSCRIPTION: Inscription = {
   submodules: [
     "974c854784aa251c7e149cdb2188b74293d9c288bf89acc8acde348dcec320edi0",
   ],
+};
+
+export const MOCK_INSCRIPTION_ACTIVITY: InscriptionActivity = {
+  txid: "9deaa74554c5ee808233d24cf96cfd82bf9d4250f0cfb65e2b8b108e099d5cae",
+  type: "INSCRIBE",
+  inscription_id:
+    "9deaa74554c5ee808233d24cf96cfd82bf9d4250f0cfb65e2b8b108e099d5caei0",
+  counterpart_address: null,
+  spent_as_fee: false,
+  timestamp: "2024-11-07T20:44:52.124Z",
+  confirmed: true,
 };

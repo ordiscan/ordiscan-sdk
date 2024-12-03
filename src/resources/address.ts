@@ -1,6 +1,12 @@
 import { Ordiscan } from "../client";
 import { Inscription } from "./inscriptions";
 import { Satribute } from "./sats";
+import {
+  Brc20Activity,
+  InscriptionActivity,
+  InscriptionTransfer,
+  RunicTx,
+} from "./tx";
 
 export interface RuneBalance {
   name: string;
@@ -40,6 +46,24 @@ export class Address {
   async rareSats() {
     return this.client.fetch<SatributeBalance[]>(
       `/address/${this.address}/rare-sats`,
+    );
+  }
+
+  async inscriptionActivity() {
+    return this.client.fetch<InscriptionActivity[]>(
+      `/address/${this.address}/activity`,
+    );
+  }
+
+  async runesActivity() {
+    return this.client.fetch<RunicTx[]>(
+      `/address/${this.address}/activity/runes`,
+    );
+  }
+
+  async brc20Activity() {
+    return this.client.fetch<Brc20Activity[]>(
+      `/address/${this.address}/activity/brc20`,
     );
   }
 }

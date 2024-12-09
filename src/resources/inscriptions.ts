@@ -1,5 +1,6 @@
 import { Satribute } from "./sats";
 import { BaseResource } from "./base";
+import { InscriptionTransfer } from "./tx";
 
 export interface Inscription {
   inscription_id: string;
@@ -21,41 +22,49 @@ export interface Inscription {
 }
 
 export class Inscriptions extends BaseResource {
-  /**
-   * Get a specific inscription by ID
-   */
-  async get({
-    inscriptionId,
-  }: {
-    inscriptionId: string;
-  }): Promise<Inscription> {
-    return this.client.fetch<Inscription>(`/inscription/${inscriptionId}`);
+  async getById({ id }: { id: string }): Promise<Inscription> {
+    return this.client.fetch<Inscription>(`/inscription/${id}`);
   }
 
-  /**
-   * List inscriptions with pagination
-   */
+  async getByNumber({ number }: { number: number }): Promise<Inscription> {
+    return this.client.fetch<Inscription>(`/inscription/${number}`);
+  }
+
   async list({
-    address,
+    sort,
+    before,
     after,
-    limit = 20,
-  }: { address?: string; after?: string; limit?: number } = {}): Promise<
-    Inscription[]
-  > {
+  }: {
+    sort?: "inscription_number_desc" | "inscription_number_asc";
+    before?: number;
+    after?: number;
+  } = {}): Promise<Inscription[]> {
     const params = new URLSearchParams();
 
-    if (address) {
-      params.append("address", address);
+    if (sort) {
+      params.append("sort", sort);
+    }
+
+    if (before) {
+      params.append("before", before.toString());
     }
 
     if (after) {
-      params.append("after", after);
+      params.append("after", after.toString());
     }
-
-    params.append("limit", limit.toString());
 
     return this.client.fetch<Inscription[]>(
       `/inscriptions?${params.toString()}`,
+    );
+  }
+
+  async transfers({
+    inscriptionId,
+  }: {
+    inscriptionId: string;
+  }): Promise<InscriptionTransfer[]> {
+    return this.client.fetch<InscriptionTransfer[]>(
+      `/inscription/${inscriptionId}/activity`,
     );
   }
 }

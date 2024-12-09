@@ -1,8 +1,8 @@
 import { expect, test } from "vitest";
 import { MOCK_INSCRIPTION } from "./mocks/inscription";
 import { MOCK_RUNIC_TX } from "./mocks/rune";
-
 import { MOCK_INSCRIPTION_TRANSFER, MOCK_TX_INFO } from "./mocks/tx";
+
 import { mock, ordiscan } from "./utils";
 
 const TXID = "2dc8414b21accf4a54421cadaa00166bfa64bb1d5019c99b151897fa0bb71534";

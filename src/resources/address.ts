@@ -1,12 +1,7 @@
 import { Ordiscan } from "../client";
 import { Inscription } from "./inscriptions";
 import { Satribute } from "./sats";
-import {
-  Brc20Activity,
-  InscriptionActivity,
-  InscriptionTransfer,
-  RunicTx,
-} from "./tx";
+import { Brc20Activity, InscriptionActivity, RunicTx } from "./tx";
 
 export interface RuneBalance {
   name: string;
@@ -29,10 +24,14 @@ export class Address {
     private readonly address: string,
   ) {}
 
-  async inscriptions() {
-    return this.client.fetch<Inscription[]>(
-      `/address/${this.address}/inscriptions`,
-    );
+  async inscriptions({ page }: { page?: number } = {}) {
+    let url = `/address/${this.address}/inscriptions`;
+
+    if (page) {
+      url += `?page=${page}`;
+    }
+
+    return this.client.fetch<Inscription[]>(url);
   }
 
   async runes() {
@@ -49,21 +48,78 @@ export class Address {
     );
   }
 
-  async inscriptionActivity() {
-    return this.client.fetch<InscriptionActivity[]>(
-      `/address/${this.address}/activity`,
-    );
+  async inscriptionActivity({
+    type,
+    page,
+  }: { type?: "transfer" | "inscribe"; page?: number } = {}) {
+    let url = `/address/${this.address}/activity`;
+
+    const searchParams = new URLSearchParams();
+
+    if (type) {
+      searchParams.append("type", type);
+    }
+
+    if (page) {
+      searchParams.append("page", page.toString());
+    }
+
+    if (searchParams.size) {
+      url += `?${searchParams.toString()}`;
+    }
+
+    return this.client.fetch<InscriptionActivity[]>(url);
   }
 
-  async runesActivity() {
-    return this.client.fetch<RunicTx[]>(
-      `/address/${this.address}/activity/runes`,
-    );
+  async runesActivity({
+    page,
+    sort,
+  }: {
+    page?: number;
+    sort?: "oldest" | "newest";
+  } = {}) {
+    let url = `/address/${this.address}/activity/runes`;
+
+    const searchParams = new URLSearchParams();
+
+    if (sort) {
+      searchParams.append("sort", sort);
+    }
+
+    if (page) {
+      searchParams.append("page", page.toString());
+    }
+
+    if (searchParams.size) {
+      url += `?${searchParams.toString()}`;
+    }
+
+    return this.client.fetch<RunicTx[]>(url);
   }
 
-  async brc20Activity() {
-    return this.client.fetch<Brc20Activity[]>(
-      `/address/${this.address}/activity/brc20`,
-    );
+  async brc20Activity({
+    page,
+    sort,
+  }: {
+    page?: number;
+    sort?: "oldest" | "newest";
+  } = {}) {
+    let url = `/address/${this.address}/activity/brc20`;
+
+    const searchParams = new URLSearchParams();
+
+    if (sort) {
+      searchParams.append("sort", sort);
+    }
+
+    if (page) {
+      searchParams.append("page", page.toString());
+    }
+
+    if (searchParams.size) {
+      url += `?${searchParams.toString()}`;
+    }
+
+    return this.client.fetch<Brc20Activity[]>(url);
   }
 }

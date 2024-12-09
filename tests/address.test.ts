@@ -23,6 +23,19 @@ test("list all inscriptions from address", async () => {
   expect(inscriptions[0].inscription_number).toBeTypeOf("number");
 });
 
+test("list all inscriptions from address (page 2)", async () => {
+  mock(`/address/${ADDRESS}/inscriptions?page=2`).reply(200, {
+    data: [MOCK_INSCRIPTION],
+  });
+
+  const inscriptions = await ordiscan.address(ADDRESS).inscriptions({
+    page: 2,
+  });
+
+  expect(inscriptions.length).toBe(1);
+  expect(inscriptions[0].inscription_number).toBeTypeOf("number");
+});
+
 test("list all rune balances from address", async () => {
   mock(`/address/${ADDRESS}/runes`).reply(200, {
     data: [MOCK_RUNE_BALANCE],
@@ -66,6 +79,19 @@ test("list all inscriptions activity for address", async () => {
   expect(activity.length).toBe(1);
 });
 
+test("list all inscriptions activity for address (with params)", async () => {
+  mock(`/address/${ADDRESS}/activity?type=inscribe&page=2`).reply(200, {
+    data: [MOCK_INSCRIPTION_ACTIVITY],
+  });
+
+  const activity = await ordiscan.address(ADDRESS).inscriptionActivity({
+    type: "inscribe",
+    page: 2,
+  });
+
+  expect(activity.length).toBe(1);
+});
+
 test("list all runes activity for address", async () => {
   mock(`/address/${ADDRESS}/activity/runes`).reply(200, {
     data: [MOCK_RUNIC_TX],
@@ -76,12 +102,38 @@ test("list all runes activity for address", async () => {
   expect(activity.length).toBe(1);
 });
 
+test("list all runes activity for address (with params)", async () => {
+  mock(`/address/${ADDRESS}/activity/runes?sort=oldest&page=2`).reply(200, {
+    data: [MOCK_RUNIC_TX],
+  });
+
+  const activity = await ordiscan.address(ADDRESS).runesActivity({
+    page: 2,
+    sort: "oldest",
+  });
+
+  expect(activity.length).toBe(1);
+});
+
 test("list all BRC-20 activity for address", async () => {
   mock(`/address/${ADDRESS}/activity/brc20`).reply(200, {
     data: [MOCK_BRC20_ACTIVITY],
   });
 
   const activity = await ordiscan.address(ADDRESS).brc20Activity();
+
+  expect(activity.length).toBe(1);
+});
+
+test("list all BRC-20 activity for address (with params)", async () => {
+  mock(`/address/${ADDRESS}/activity/brc20?sort=oldest&page=2`).reply(200, {
+    data: [MOCK_BRC20_ACTIVITY],
+  });
+
+  const activity = await ordiscan.address(ADDRESS).brc20Activity({
+    sort: "oldest",
+    page: 2,
+  });
 
   expect(activity.length).toBe(1);
 });

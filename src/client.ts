@@ -8,6 +8,7 @@ import { Inscriptions } from "./resources/inscriptions";
 import { Address } from "./resources/address";
 import { Tx } from "./resources/tx";
 import { Rune } from "./resources/rune";
+import { Brc20 } from "./resources/brc20";
 import { Sats } from "./resources/sats";
 import { Runes } from "./resources/runes";
 
@@ -21,6 +22,7 @@ export class Ordiscan {
   public readonly address: (address: string) => Address;
   public readonly tx: (txid: string) => Tx;
   public readonly rune: (name: string) => Rune;
+  public readonly brc20: (name: string) => Brc20;
 
   public readonly inscriptions: Inscriptions;
   public readonly runes: Runes;
@@ -35,6 +37,7 @@ export class Ordiscan {
     this.address = (address: string) => new Address(this, address);
     this.tx = (txid: string) => new Tx(this, txid);
     this.rune = (name: string) => new Rune(this, name);
+    this.brc20 = (name: string) => new Brc20(this, name);
 
     this.inscriptions = new Inscriptions(this);
     this.runes = new Runes(this);

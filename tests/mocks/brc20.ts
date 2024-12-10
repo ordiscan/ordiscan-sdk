@@ -1,5 +1,13 @@
 import { Brc20Balance } from "../../src/resources/address";
+import { Brc20Info } from "../../src/resources/brc20";
 import { Brc20Activity } from "../../src/resources/tx";
+
+export const MOCK_BRC20_INFO: Brc20Info = {
+  tick: "ORDI",
+  max_supply: 21000000,
+  minted: 21000000,
+  price: 41.57,
+};
 
 export const MOCK_BRC20_BALANCE: Brc20Balance = {
   tick: "SATS",

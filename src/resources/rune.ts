@@ -1,4 +1,4 @@
-import { Ordiscan } from "../client";
+import { BaseResource } from "./base";
 
 export interface RuneInfo {
   id: string;
@@ -36,21 +36,42 @@ export interface RuneName {
   unlock_block_timestamp: string;
 }
 
-export class Rune {
-  constructor(
-    private readonly client: Ordiscan,
-    private readonly name: string,
-  ) {}
+export class RuneResource extends BaseResource {
+  async list({
+    sort,
+    after,
+    before,
+  }: {
+    sort?: "newest" | "oldest";
+    after?: number;
+    before?: number;
+  } = {}): Promise<RuneInfo[]> {
+    const params = new URLSearchParams();
 
-  async info() {
-    return this.client.fetch<RuneInfo>(`/rune/${this.name}`);
+    if (sort) {
+      params.append("sort", sort);
+    }
+
+    if (before) {
+      params.append("before", before.toString());
+    }
+
+    if (after) {
+      params.append("after", after.toString());
+    }
+
+    return this.client.fetch<RuneInfo[]>(`/runes?${params.toString()}`);
   }
 
-  async market() {
-    return this.client.fetch<RuneMarketInfo>(`/rune/${this.name}/market`);
+  async getInfo({ name }: { name: string }) {
+    return this.client.fetch<RuneInfo>(`/rune/${name}`);
   }
 
-  async unlockDate() {
-    return this.client.fetch<RuneName>(`/rune-name/${this.name}`);
+  async getMarketInfo({ name }: { name: string }) {
+    return this.client.fetch<RuneMarketInfo>(`/rune/${name}/market`);
+  }
+
+  async getUnlockDate({ name }: { name: string }) {
+    return this.client.fetch<RuneName>(`/rune-name/${name}`);
   }
 }

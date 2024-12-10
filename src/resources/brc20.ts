@@ -1,4 +1,4 @@
-import { Ordiscan } from "../client";
+import { BaseResource } from "./base";
 
 export interface Brc20Info {
   tick: string;
@@ -7,13 +7,10 @@ export interface Brc20Info {
   price: number;
 }
 
-export class Brc20 {
-  constructor(
-    private readonly client: Ordiscan,
-    private readonly name: string,
-  ) {}
+export class Brc20Resource extends BaseResource {
+  // TODO: list()
 
-  async info() {
-    return this.client.fetch<Brc20Info>(`/brc20/${this.name}`);
+  async getInfo({ name }: { name: string }) {
+    return this.client.fetch<Brc20Info>(`/brc20/${name}`);
   }
 }

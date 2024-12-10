@@ -10,7 +10,7 @@ test("get sat by number", async () => {
     data: MOCK_SAT,
   });
 
-  const sat = await ordiscan.sats.get(SAT_NUMBER);
+  const sat = await ordiscan.sat.get(SAT_NUMBER);
 
   expect(sat.satributes.length).toBe(2);
 });
@@ -23,7 +23,7 @@ test("get sat ranges for UTXO", async () => {
     data: [[740078609838558, 740078609848558]],
   });
 
-  const satRanges = await ordiscan.sats.list({ utxo: UTXO });
+  const satRanges = await ordiscan.sat.list({ utxo: UTXO });
 
   expect(satRanges.length).toBe(1);
 });

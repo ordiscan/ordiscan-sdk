@@ -1,4 +1,4 @@
-import { Satribute } from "./sats";
+import { Satribute } from "./sat";
 import { BaseResource } from "./base";
 import { InscriptionTransfer } from "./tx";
 
@@ -21,7 +21,7 @@ export interface Inscription {
   submodules: string[];
 }
 
-export class Inscriptions extends BaseResource {
+export class InscriptionResource extends BaseResource {
   async getById({ id }: { id: string }): Promise<Inscription> {
     return this.client.fetch<Inscription>(`/inscription/${id}`);
   }
@@ -58,7 +58,7 @@ export class Inscriptions extends BaseResource {
     );
   }
 
-  async transfers({
+  async getTransfers({
     inscriptionId,
   }: {
     inscriptionId: string;

@@ -14,7 +14,7 @@ test("list runes", async () => {
     data: [MOCK_RUNE_INFO],
   });
 
-  const runes = await ordiscan.runes.list();
+  const runes = await ordiscan.rune.list();
 
   expect(runes.length).toBe(1);
   expect(runes[0].name).toBeTypeOf("string");
@@ -25,7 +25,7 @@ test("list runes (with params)", async () => {
     data: [MOCK_RUNE_INFO],
   });
 
-  const runes = await ordiscan.runes.list({
+  const runes = await ordiscan.rune.list({
     sort: "newest",
     after: 20,
   });
@@ -39,7 +39,7 @@ test("get rune info", async () => {
     data: MOCK_RUNE_INFO,
   });
 
-  const rune = await ordiscan.rune(RUNE_NAME).info();
+  const rune = await ordiscan.rune.getInfo({ name: RUNE_NAME });
 
   expect(rune.formatted_name).toBeTypeOf("string");
 });
@@ -49,7 +49,7 @@ test("get rune market info", async () => {
     data: MOCK_RUNE_MARKET_INFO,
   });
 
-  const market = await ordiscan.rune(RUNE_NAME).market();
+  const market = await ordiscan.rune.getMarketInfo({ name: RUNE_NAME });
 
   expect(market.price_in_sats).toBeTypeOf("number");
 });
@@ -59,7 +59,7 @@ test("get rune unlock date", async () => {
     data: MOCK_RUNE_NAME,
   });
 
-  const market = await ordiscan.rune(RUNE_NAME).unlockDate();
+  const market = await ordiscan.rune.getUnlockDate({ name: RUNE_NAME });
 
   expect(market.status).toBe("LOCKED");
 });

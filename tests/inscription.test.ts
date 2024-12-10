@@ -9,7 +9,7 @@ test("list all inscriptions", async () => {
     data: [MOCK_INSCRIPTION, MOCK_INSCRIPTION],
   });
 
-  const inscriptions = await ordiscan.inscriptions.list();
+  const inscriptions = await ordiscan.inscription.list();
 
   expect(inscriptions.length).toBe(2);
   expect(inscriptions[0].inscription_number).toBe(
@@ -22,7 +22,7 @@ test("list all inscriptions (with params)", async () => {
     data: [MOCK_INSCRIPTION, MOCK_INSCRIPTION],
   });
 
-  const inscriptions = await ordiscan.inscriptions.list({
+  const inscriptions = await ordiscan.inscription.list({
     after: 20,
     sort: "inscription_number_desc",
   });
@@ -41,7 +41,7 @@ test("succeed to get inscription by ID", async () => {
     data: MOCK_INSCRIPTION,
   });
 
-  const inscription = await ordiscan.inscriptions.getById({
+  const inscription = await ordiscan.inscription.getById({
     id,
   });
 
@@ -57,7 +57,7 @@ test("succeed to get inscription by number", async () => {
     data: MOCK_INSCRIPTION,
   });
 
-  const inscription = await ordiscan.inscriptions.getByNumber({
+  const inscription = await ordiscan.inscription.getByNumber({
     number,
   });
 
@@ -77,7 +77,7 @@ test("fail to get invalid inscription", async () => {
   });
 
   await expect(
-    ordiscan.inscriptions.getById({
+    ordiscan.inscription.getById({
       id: invalidInscriptionId,
     }),
   ).rejects.toThrow("Inscription not found");
@@ -91,7 +91,7 @@ test("list inscription transfers", async () => {
     data: [MOCK_INSCRIPTION_TRANSFER],
   });
 
-  const transfers = await ordiscan.inscriptions.transfers({
+  const transfers = await ordiscan.inscription.getTransfers({
     inscriptionId: id,
   });
 

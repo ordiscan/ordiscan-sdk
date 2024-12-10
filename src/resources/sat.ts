@@ -33,7 +33,7 @@ export interface Sat {
 
 export type SatRange = [number, number];
 
-export class Sats extends BaseResource {
+export class SatResource extends BaseResource {
   async get(satNumber: number): Promise<Sat> {
     return this.client.fetch<Sat>(`/sat/${satNumber}`);
   }

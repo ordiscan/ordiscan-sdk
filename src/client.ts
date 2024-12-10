@@ -4,13 +4,13 @@ import {
   OrdiscanConfig,
   OrdiscanError,
 } from "./types";
-import { Inscriptions } from "./resources/inscriptions";
+
+import { InscriptionResource } from "./resources/inscription";
 import { Address } from "./resources/address";
 import { Tx } from "./resources/tx";
-import { Rune } from "./resources/rune";
-import { Brc20 } from "./resources/brc20";
-import { Sats } from "./resources/sats";
-import { Runes } from "./resources/runes";
+import { RuneResource } from "./resources/rune";
+import { Brc20Resource } from "./resources/brc20";
+import { SatResource } from "./resources/sat";
 
 const DEFAULT_BASE_URL = "https://api.ordiscan.com/v1";
 
@@ -21,12 +21,11 @@ export class Ordiscan {
 
   public readonly address: (address: string) => Address;
   public readonly tx: (txid: string) => Tx;
-  public readonly rune: (name: string) => Rune;
-  public readonly brc20: (name: string) => Brc20;
 
-  public readonly inscriptions: Inscriptions;
-  public readonly runes: Runes;
-  public readonly sats: Sats;
+  public readonly inscription: InscriptionResource;
+  public readonly rune: RuneResource;
+  public readonly sat: SatResource;
+  public readonly brc20: Brc20Resource;
 
   constructor(config: OrdiscanConfig) {
     this.auth = config.auth;
@@ -36,12 +35,11 @@ export class Ordiscan {
     // Initialize resources
     this.address = (address: string) => new Address(this, address);
     this.tx = (txid: string) => new Tx(this, txid);
-    this.rune = (name: string) => new Rune(this, name);
-    this.brc20 = (name: string) => new Brc20(this, name);
 
-    this.inscriptions = new Inscriptions(this);
-    this.runes = new Runes(this);
-    this.sats = new Sats(this);
+    this.inscription = new InscriptionResource(this);
+    this.rune = new RuneResource(this);
+    this.sat = new SatResource(this);
+    this.brc20 = new Brc20Resource(this);
   }
 
   private get apiUrl(): string {

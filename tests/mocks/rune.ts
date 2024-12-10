@@ -1,6 +1,10 @@
 import { type RuneBalance } from "../../src/resources/address";
 import { type RunicTx } from "../../src/resources/tx";
-import { type RuneInfo, type RuneMarketInfo } from "../../src/resources/rune";
+import {
+  type RuneName,
+  type RuneInfo,
+  type RuneMarketInfo,
+} from "../../src/resources/rune";
 
 export const MOCK_RUNE_INFO: RuneInfo = {
   id: "1:0",
@@ -27,6 +31,13 @@ export const MOCK_RUNE_MARKET_INFO: RuneMarketInfo = {
   price_in_usd: 0.00878,
   market_cap_in_btc: 12380,
   market_cap_in_usd: 878001980,
+};
+
+export const MOCK_RUNE_NAME: RuneName = {
+  name: "HELLO",
+  status: "LOCKED",
+  unlock_block_height: 975173,
+  unlock_block_timestamp: "2026-11-14T23:15:07.000Z",
 };
 
 export const MOCK_RUNE_BALANCE: RuneBalance = {

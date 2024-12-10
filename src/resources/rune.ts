@@ -29,6 +29,13 @@ export interface RuneMarketInfo {
   market_cap_in_usd: number;
 }
 
+export interface RuneName {
+  name: string;
+  status: "ETCHED" | "AVAILABLE" | "LOCKED" | "RESERVED";
+  unlock_block_height: number;
+  unlock_block_timestamp: string;
+}
+
 export class Rune {
   constructor(
     private readonly client: Ordiscan,
@@ -41,5 +48,9 @@ export class Rune {
 
   async market() {
     return this.client.fetch<RuneMarketInfo>(`/rune/${this.name}/market`);
+  }
+
+  async unlockDate() {
+    return this.client.fetch<RuneName>(`/rune-name/${this.name}`);
   }
 }

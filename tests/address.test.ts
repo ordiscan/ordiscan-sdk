@@ -108,8 +108,8 @@ test("list all runes activity for address (with params)", async () => {
   });
 
   const activity = await ordiscan.address(ADDRESS).runesActivity({
-    page: 2,
     sort: "oldest",
+    page: 2,
   });
 
   expect(activity.length).toBe(1);

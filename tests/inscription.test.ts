@@ -23,8 +23,8 @@ test("list all inscriptions (with params)", async () => {
   });
 
   const inscriptions = await ordiscan.inscription.list({
-    after: 20,
     sort: "inscription_number_desc",
+    after: 20,
   });
 
   expect(inscriptions.length).toBe(2);

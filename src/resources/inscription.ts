@@ -56,11 +56,11 @@ export class InscriptionResource extends BaseResource {
       params.append("sort", sort);
     }
 
-    if (before) {
+    if (before !== undefined) {
       params.append("before", before.toString());
     }
 
-    if (after) {
+    if (after !== undefined) {
       params.append("after", after.toString());
     }
 

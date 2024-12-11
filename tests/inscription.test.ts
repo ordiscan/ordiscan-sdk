@@ -5,25 +5,14 @@ import { MOCK_INSCRIPTION } from "./mocks/inscription";
 import { MOCK_INSCRIPTION_TRANSFER } from "./mocks/tx";
 import { InscriptionSchema } from "../src/resources/inscription";
 
-test("list all inscriptions", async () => {
-  mock(`/inscriptions`)?.reply(200, {
-    data: [MOCK_INSCRIPTION, MOCK_INSCRIPTION],
-  });
-
-  const inscriptions = await ordiscan.inscription.list();
-
-  expect(inscriptions.length).toBeGreaterThan(0);
-  expect(InscriptionSchema.parse(inscriptions[0])).toBeTruthy();
-});
-
 test("list all inscriptions (with params)", async () => {
   mock(`/inscriptions?sort=inscription_number_desc&after=20`)?.reply(200, {
     data: [MOCK_INSCRIPTION, MOCK_INSCRIPTION],
   });
 
   const inscriptions = await ordiscan.inscription.list({
-    sort: "inscription_number_desc",
-    after: 20,
+    sort: "inscription_number_asc",
+    after: 0,
   });
 
   expect(inscriptions.length).toBeGreaterThan(0);

@@ -11,6 +11,8 @@ export const ordiscan = new Ordiscan({
 });
 
 export const mock = (path: string) => {
+  if (process.env.SKIP_MOCKS) return null;
+
   return nock(process.env.ORDISCAN_BASE_URL || DEFAULT_TEST_BASE_URL).get(
     `/v1${path}`,
   );

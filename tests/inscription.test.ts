@@ -5,20 +5,18 @@ import { MOCK_INSCRIPTION } from "./mocks/inscription";
 import { MOCK_INSCRIPTION_TRANSFER } from "./mocks/tx";
 
 test("list all inscriptions", async () => {
-  mock(`/inscriptions`).reply(200, {
+  mock(`/inscriptions`)?.reply(200, {
     data: [MOCK_INSCRIPTION, MOCK_INSCRIPTION],
   });
 
   const inscriptions = await ordiscan.inscription.list();
 
-  expect(inscriptions.length).toBe(2);
-  expect(inscriptions[0].inscription_number).toBe(
-    MOCK_INSCRIPTION.inscription_number,
-  );
+  expect(inscriptions.length).toBeGreaterThan(0);
+  expect(inscriptions[0].inscription_number).toBeTypeOf("number");
 });
 
 test("list all inscriptions (with params)", async () => {
-  mock(`/inscriptions?sort=inscription_number_desc&after=20`).reply(200, {
+  mock(`/inscriptions?sort=inscription_number_desc&after=20`)?.reply(200, {
     data: [MOCK_INSCRIPTION, MOCK_INSCRIPTION],
   });
 
@@ -27,17 +25,15 @@ test("list all inscriptions (with params)", async () => {
     after: 20,
   });
 
-  expect(inscriptions.length).toBe(2);
-  expect(inscriptions[0].inscription_number).toBe(
-    MOCK_INSCRIPTION.inscription_number,
-  );
+  expect(inscriptions.length).toBeGreaterThan(0);
+  expect(inscriptions[0].inscription_number).toBeTypeOf("number");
 });
 
 test("succeed to get inscription by ID", async () => {
   const id =
     "aa063cd70a4d526d2a3f0d7b1bc7328dd42de6e86b73c1c95785dfc2ac99e060i0";
 
-  mock(`/inscription/${id}`).reply(200, {
+  mock(`/inscription/${id}`)?.reply(200, {
     data: MOCK_INSCRIPTION,
   });
 
@@ -45,15 +41,13 @@ test("succeed to get inscription by ID", async () => {
     id,
   });
 
-  expect(inscription.inscription_number).toBe(
-    MOCK_INSCRIPTION.inscription_number,
-  );
+  expect(inscription.inscription_id).toBeTypeOf("string");
 });
 
 test("succeed to get inscription by number", async () => {
   const number = 1;
 
-  mock(`/inscription/${number}`).reply(200, {
+  mock(`/inscription/${number}`)?.reply(200, {
     data: MOCK_INSCRIPTION,
   });
 
@@ -61,16 +55,14 @@ test("succeed to get inscription by number", async () => {
     number,
   });
 
-  expect(inscription.inscription_number).toBe(
-    MOCK_INSCRIPTION.inscription_number,
-  );
+  expect(inscription.inscription_number).toBeTypeOf("number");
 });
 
 test("fail to get invalid inscription", async () => {
   const invalidInscriptionId =
     "aa063cd70a4d526d2a3f0d7b1bc7328dd42de6e86b73c1c95785dfc2ac99e060i1";
 
-  mock(`/inscription/${invalidInscriptionId}`).reply(404, {
+  mock(`/inscription/${invalidInscriptionId}`)?.reply(404, {
     error: {
       message: "Inscription not found",
     },
@@ -85,9 +77,9 @@ test("fail to get invalid inscription", async () => {
 
 test("list inscription transfers", async () => {
   const id =
-    "aa063cd70a4d526d2a3f0d7b1bc7328dd42de6e86b73c1c95785dfc2ac99e060i0";
+    "26482871f33f1051f450f2da9af275794c0b5f1c61ebf35e4467fb42c2813403i0";
 
-  mock(`/inscription/${id}/activity`).reply(200, {
+  mock(`/inscription/${id}/activity`)?.reply(200, {
     data: [MOCK_INSCRIPTION_TRANSFER],
   });
 
@@ -95,7 +87,5 @@ test("list inscription transfers", async () => {
     inscriptionId: id,
   });
 
-  expect(transfers[0].inscription_id).toBe(
-    MOCK_INSCRIPTION_TRANSFER.inscription_id,
-  );
+  expect(transfers[0].inscription_id).toBeTypeOf("string");
 });

@@ -6,7 +6,7 @@ import { mock, ordiscan } from "./utils";
 const TOKEN_NAME = "ordi";
 
 test("list brc20 tokens", async () => {
-  mock(`/brc20`).reply(200, {
+  mock(`/brc20`)?.reply(200, {
     data: [MOCK_BRC20_INFO],
   });
 
@@ -16,20 +16,20 @@ test("list brc20 tokens", async () => {
 });
 
 test("list brc20 tokens (with params)", async () => {
-  mock(`/brc20?sort=oldest&page=2`).reply(200, {
-    data: [MOCK_BRC20_INFO],
+  mock(`/brc20?sort=oldest&page=2`)?.reply(200, {
+    data: [],
   });
 
-  const token = await ordiscan.brc20.list({
+  const tokens = await ordiscan.brc20.list({
     sort: "oldest",
     page: 2,
   });
 
-  expect(token[0].tick).toBeTypeOf("string");
+  expect(tokens.length).toBe(0);
 });
 
 test("get brc20 info", async () => {
-  mock(`/brc20/${TOKEN_NAME}`).reply(200, {
+  mock(`/brc20/${TOKEN_NAME}`)?.reply(200, {
     data: MOCK_BRC20_INFO,
   });
 

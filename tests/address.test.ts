@@ -8,10 +8,15 @@ import {
 import { MOCK_RUNE_BALANCE, MOCK_RUNIC_TX } from "./mocks/rune";
 import { MOCK_BRC20_BALANCE, MOCK_BRC20_ACTIVITY } from "./mocks/brc20";
 import { MOCK_RARE_SAT_BALANCE } from "./mocks/rareSat";
+import { InscriptionSchema } from "../src/resources/inscription";
+import {
+  Brc20BalanceSchema,
+  RuneBalanceSchema,
+  SatributeBalanceSchema,
+} from "../src/resources/address";
 
 test("list all inscriptions from address", async () => {
-  const ADDRESS =
-    "bc1plcx7gv8a48479e5ut4zg2c23q8cuptzxuhzqw5mjqx3qxn855nhqexy4g3";
+  const ADDRESS = "bc1qctx9fzhzf4253ka7jd2s0sf5fqvzffnfvpk5wn";
 
   mock(`/address/${ADDRESS}/inscriptions`)?.reply(200, {
     data: [MOCK_INSCRIPTION],
@@ -20,12 +25,11 @@ test("list all inscriptions from address", async () => {
   const inscriptions = await ordiscan.address(ADDRESS).inscriptions();
 
   expect(inscriptions.length).toBeGreaterThan(0);
-  expect(inscriptions[0].inscription_number).toBeTypeOf("number");
+  expect(InscriptionSchema.parse(inscriptions[0])).toBeTruthy();
 });
 
 test("list all inscriptions from address (page 2)", async () => {
-  const ADDRESS =
-    "bc1plcx7gv8a48479e5ut4zg2c23q8cuptzxuhzqw5mjqx3qxn855nhqexy4g3";
+  const ADDRESS = "bc1qctx9fzhzf4253ka7jd2s0sf5fqvzffnfvpk5wn";
 
   mock(`/address/${ADDRESS}/inscriptions?page=2`)?.reply(200, {
     data: [],
@@ -49,7 +53,7 @@ test("list all rune balances from address", async () => {
   const runeBalances = await ordiscan.address(ADDRESS).runes();
 
   expect(runeBalances.length).toBeGreaterThan(0);
-  expect(runeBalances[0].name).toBeTypeOf("string");
+  expect(RuneBalanceSchema.parse(runeBalances[0])).toBeTruthy();
 });
 
 test("list all BRC-20 balances from address", async () => {
@@ -63,7 +67,7 @@ test("list all BRC-20 balances from address", async () => {
   const brc20Balances = await ordiscan.address(ADDRESS).brc20();
 
   expect(brc20Balances.length).toBeGreaterThan(0);
-  expect(brc20Balances[0].tick).toBeTypeOf("string");
+  expect(Brc20BalanceSchema.parse(brc20Balances[0])).toBeTruthy();
 });
 
 test("list all rare sats from address", async () => {
@@ -76,8 +80,7 @@ test("list all rare sats from address", async () => {
 
   const rareSatBalances = await ordiscan.address(ADDRESS).rareSats();
 
-  expect(rareSatBalances[0].satributes.length).toBeGreaterThan(0);
-  expect(rareSatBalances[0].ranges.length).toBeGreaterThan(0);
+  expect(SatributeBalanceSchema.parse(rareSatBalances[0])).toBeTruthy();
 });
 
 test("list all inscriptions activity for address", async () => {

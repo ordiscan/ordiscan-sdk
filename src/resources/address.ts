@@ -1,22 +1,30 @@
+import { z } from "zod";
+
 import { Ordiscan } from "../client";
 import { Inscription } from "./inscription";
-import { Satribute } from "./sat";
+import { SatributeSchema } from "./sat";
 import { Brc20Activity, InscriptionActivity, RunicTx } from "./tx";
 
-export interface RuneBalance {
-  name: string;
-  balance: string;
-}
+export const RuneBalanceSchema = z.object({
+  name: z.string(),
+  balance: z.string(),
+});
 
-export interface Brc20Balance {
-  tick: string;
-  balance: number;
-}
+export type RuneBalance = z.infer<typeof RuneBalanceSchema>;
 
-export interface SatributeBalance {
-  satributes: Satribute[];
-  ranges: [number, number][];
-}
+export const Brc20BalanceSchema = z.object({
+  tick: z.string(),
+  balance: z.number(),
+});
+
+export type Brc20Balance = z.infer<typeof Brc20BalanceSchema>;
+
+export const SatributeBalanceSchema = z.object({
+  satributes: z.array(SatributeSchema),
+  ranges: z.array(z.array(z.number())),
+});
+
+export type SatributeBalance = z.infer<typeof SatributeBalanceSchema>;
 
 export class Address {
   constructor(

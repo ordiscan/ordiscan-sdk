@@ -54,18 +54,18 @@ export class Address {
   }: { type?: "transfer" | "inscribe"; page?: number } = {}) {
     let url = `/address/${this.address}/activity`;
 
-    const searchParams = new URLSearchParams();
+    const params = new URLSearchParams();
 
     if (type) {
-      searchParams.append("type", type);
+      params.append("type", type);
     }
 
     if (page) {
-      searchParams.append("page", page.toString());
+      params.append("page", page.toString());
     }
 
-    if (searchParams.size) {
-      url += `?${searchParams.toString()}`;
+    if (params.size) {
+      url += `?${params.toString()}`;
     }
 
     return this.client.fetch<InscriptionActivity[]>(url);
@@ -80,18 +80,18 @@ export class Address {
   } = {}) {
     let url = `/address/${this.address}/activity/runes`;
 
-    const searchParams = new URLSearchParams();
+    const params = new URLSearchParams();
 
     if (sort) {
-      searchParams.append("sort", sort);
+      params.append("sort", sort);
     }
 
     if (page) {
-      searchParams.append("page", page.toString());
+      params.append("page", page.toString());
     }
 
-    if (searchParams.size) {
-      url += `?${searchParams.toString()}`;
+    if (params.size) {
+      url += `?${params.toString()}`;
     }
 
     return this.client.fetch<RunicTx[]>(url);
@@ -106,18 +106,18 @@ export class Address {
   } = {}) {
     let url = `/address/${this.address}/activity/brc20`;
 
-    const searchParams = new URLSearchParams();
+    const params = new URLSearchParams();
 
     if (sort) {
-      searchParams.append("sort", sort);
+      params.append("sort", sort);
     }
 
     if (page) {
-      searchParams.append("page", page.toString());
+      params.append("page", page.toString());
     }
 
-    if (searchParams.size) {
-      url += `?${searchParams.toString()}`;
+    if (params.size) {
+      url += `?${params.toString()}`;
     }
 
     return this.client.fetch<Brc20Activity[]>(url);

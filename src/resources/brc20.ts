@@ -22,18 +22,18 @@ export class Brc20Resource extends BaseResource {
   } = {}) {
     let url = `/brc20`;
 
-    const searchParams = new URLSearchParams();
+    const params = new URLSearchParams();
 
     if (sort) {
-      searchParams.append("sort", sort);
+      params.append("sort", sort);
     }
 
     if (page) {
-      searchParams.append("page", page.toString());
+      params.append("page", page.toString());
     }
 
-    if (searchParams.size) {
-      url += `?${searchParams.toString()}`;
+    if (params.size) {
+      url += `?${params.toString()}`;
     }
 
     return this.client.fetch<Brc20[]>(url);

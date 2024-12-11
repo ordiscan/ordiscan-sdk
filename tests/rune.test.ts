@@ -1,5 +1,11 @@
 import { expect, test } from "vitest";
 import {
+  RuneMarketInfoSchema,
+  RuneNameSchema,
+  RuneBaseSchema,
+  RuneWithSupplySchema,
+} from "../src/resources/rune";
+import {
   MOCK_RUNE_INFO,
   MOCK_RUNE_MARKET_INFO,
   MOCK_RUNE_NAME,
@@ -17,7 +23,7 @@ test("list runes", async () => {
   const runes = await ordiscan.rune.list();
 
   expect(runes.length).toBeGreaterThan(0);
-  expect(runes[0].name).toBeTypeOf("string");
+  expect(RuneBaseSchema.parse(runes[0])).toBeTruthy();
 });
 
 test("list runes (with params)", async () => {
@@ -31,7 +37,7 @@ test("list runes (with params)", async () => {
   });
 
   expect(runes.length).toBeGreaterThan(0);
-  expect(runes[0].name).toBeTypeOf("string");
+  expect(RuneBaseSchema.parse(runes[0])).toBeTruthy();
 });
 
 test("get rune info", async () => {
@@ -41,7 +47,7 @@ test("get rune info", async () => {
 
   const rune = await ordiscan.rune.getInfo({ name: RUNE_NAME });
 
-  expect(rune.formatted_name).toBeTypeOf("string");
+  expect(RuneWithSupplySchema.parse(rune)).toBeTruthy();
 });
 
 test("get rune market info", async () => {
@@ -51,7 +57,7 @@ test("get rune market info", async () => {
 
   const market = await ordiscan.rune.getMarketInfo({ name: RUNE_NAME });
 
-  expect(market.price_in_sats).toBeTypeOf("number");
+  expect(RuneMarketInfoSchema.parse(market)).toBeTruthy();
 });
 
 test("get rune unlock date", async () => {
@@ -59,7 +65,7 @@ test("get rune unlock date", async () => {
     data: MOCK_RUNE_NAME,
   });
 
-  const market = await ordiscan.rune.getUnlockDate({ name: "HELLO" });
+  const name = await ordiscan.rune.getUnlockDate({ name: "HELLO" });
 
-  expect(market.status).toBe("LOCKED");
+  expect(RuneNameSchema.parse(name)).toBeTruthy();
 });

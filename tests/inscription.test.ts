@@ -3,6 +3,7 @@ import { expect, test } from "vitest";
 import { mock, ordiscan } from "./utils";
 import { MOCK_INSCRIPTION } from "./mocks/inscription";
 import { MOCK_INSCRIPTION_TRANSFER } from "./mocks/tx";
+import { InscriptionSchema } from "../src/resources/inscription";
 
 test("list all inscriptions", async () => {
   mock(`/inscriptions`)?.reply(200, {
@@ -12,7 +13,7 @@ test("list all inscriptions", async () => {
   const inscriptions = await ordiscan.inscription.list();
 
   expect(inscriptions.length).toBeGreaterThan(0);
-  expect(inscriptions[0].inscription_number).toBeTypeOf("number");
+  expect(InscriptionSchema.parse(inscriptions[0])).toBeTruthy();
 });
 
 test("list all inscriptions (with params)", async () => {
@@ -26,7 +27,7 @@ test("list all inscriptions (with params)", async () => {
   });
 
   expect(inscriptions.length).toBeGreaterThan(0);
-  expect(inscriptions[0].inscription_number).toBeTypeOf("number");
+  expect(InscriptionSchema.parse(inscriptions[0])).toBeTruthy();
 });
 
 test("succeed to get inscription by ID", async () => {
@@ -41,7 +42,7 @@ test("succeed to get inscription by ID", async () => {
     id,
   });
 
-  expect(inscription.inscription_id).toBeTypeOf("string");
+  expect(InscriptionSchema.parse(inscription)).toBeTruthy();
 });
 
 test("succeed to get inscription by number", async () => {
@@ -55,7 +56,7 @@ test("succeed to get inscription by number", async () => {
     number,
   });
 
-  expect(inscription.inscription_number).toBeTypeOf("number");
+  expect(InscriptionSchema.parse(inscription)).toBeTruthy();
 });
 
 test("fail to get invalid inscription", async () => {

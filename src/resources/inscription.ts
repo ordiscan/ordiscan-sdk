@@ -1,25 +1,31 @@
-import { Satribute } from "./sat";
+import { z } from "zod";
+
 import { BaseResource } from "./base";
+import { SatributeSchema } from "./sat";
 import { InscriptionTransfer } from "./tx";
 
-export interface Inscription {
-  inscription_id: string;
-  inscription_number: number;
-  content_type: string;
-  owner_address: string;
-  owner_output: string;
-  genesis_address: string;
-  genesis_output: string;
-  timestamp: string;
-  metadata: null; // TODO
-  metaprotocol: string | null;
-  sat: number;
-  content_url: string;
-  parent_inscription_id: string | null;
-  delegate_inscription_id: string | null;
-  satributes: Satribute[];
-  submodules: string[];
-}
+export const InscriptionSchema = z
+  .object({
+    inscription_id: z.string(),
+    inscription_number: z.number(),
+    content_type: z.string(),
+    owner_address: z.string(),
+    owner_output: z.string(),
+    timestamp: z.string(),
+    metadata: z.null(), // TODO
+    metaprotocol: z.string().nullable(),
+    sat: z.number(),
+    content_url: z.string(),
+    parent_inscription_id: z.string().nullable(),
+    delegate_inscription_id: z.string().nullable(),
+    satributes: z.array(SatributeSchema),
+    submodules: z.array(z.string()),
+    genesis_address: z.string(),
+    genesis_output: z.string(),
+  })
+  .strict();
+
+export type Inscription = z.infer<typeof InscriptionSchema>;
 
 export class InscriptionResource extends BaseResource {
   async getById({ id }: { id: string }): Promise<Inscription> {

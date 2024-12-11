@@ -1,26 +1,30 @@
+import { z } from "zod";
 import { BaseResource } from "./base";
 
-export type Satribute =
-  | "UNCOMMON"
-  | "RARE"
-  | "EPIC"
-  | "LEGENDARY"
-  | "MYTHIC"
-  | "BLACK_UNCOMMON"
-  | "BLACK_RARE"
-  | "BLACK_EPIC"
-  | "BLACK_LEGENDARY"
-  | "BLACK_MYTHIC"
-  | "BLOCK_9"
-  | "BLOCK_78"
-  | "NAKAMOTO"
-  | "FIRST_TX"
-  | "VINTAGE"
-  | "PIZZA"
-  | "HITMAN"
-  | "PALINDROME"
-  | "ALPHA"
-  | "OMEGA";
+export const SatributeSchema = z.enum([
+  "UNCOMMON",
+  "RARE",
+  "EPIC",
+  "LEGENDARY",
+  "MYTHIC",
+  "BLACK_UNCOMMON",
+  "BLACK_RARE",
+  "BLACK_EPIC",
+  "BLACK_LEGENDARY",
+  "BLACK_MYTHIC",
+  "BLOCK_9",
+  "BLOCK_78",
+  "NAKAMOTO",
+  "FIRST_TX",
+  "VINTAGE",
+  "PIZZA",
+  "HITMAN",
+  "PALINDROME",
+  "ALPHA",
+  "OMEGA",
+]);
+
+export type Satribute = z.infer<typeof SatributeSchema>;
 
 export interface Sat {
   sat_number: number;

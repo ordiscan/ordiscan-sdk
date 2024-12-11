@@ -26,14 +26,18 @@ export const SatributeSchema = z.enum([
 
 export type Satribute = z.infer<typeof SatributeSchema>;
 
-export interface Sat {
-  sat_number: number;
-  satributes: Satribute[];
-  creation_date: string;
-  block_height: number;
-  epoch: number;
-  inscription_ids: string[];
-}
+export const SatSchema = z
+  .object({
+    sat_number: z.number(),
+    satributes: z.array(SatributeSchema),
+    creation_date: z.string(),
+    block_height: z.number(),
+    epoch: z.number(),
+    inscription_ids: z.array(z.string()),
+  })
+  .strict();
+
+export type Sat = z.infer<typeof SatSchema>;
 
 export type SatRange = [number, number];
 

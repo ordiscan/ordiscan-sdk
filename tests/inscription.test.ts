@@ -32,7 +32,7 @@ test("list all inscriptions (with params)", async () => {
 
 test("succeed to get inscription by ID", async () => {
   const id =
-    "aa063cd70a4d526d2a3f0d7b1bc7328dd42de6e86b73c1c95785dfc2ac99e060i0";
+    "26482871f33f1051f450f2da9af275794c0b5f1c61ebf35e4467fb42c2813403i0";
 
   mock(`/inscription/${id}`)?.reply(200, {
     data: MOCK_INSCRIPTION,

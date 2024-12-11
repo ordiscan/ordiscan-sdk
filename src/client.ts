@@ -55,7 +55,12 @@ export class Ordiscan {
     };
 
     if (process.env.NODE_ENV === "test") {
-      console.log("➡️", options.method || "GET", url);
+      const isMock = !process.env.SKIP_MOCKS;
+
+      console.log(
+        `➡️${isMock ? "(mocked)" : "(real)"} ${options.method || "GET"}`,
+        url,
+      );
     }
 
     const response = await fetch(url, {

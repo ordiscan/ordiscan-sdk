@@ -1,6 +1,6 @@
 import { Ordiscan } from "../client";
-import { Inscription } from "./inscriptions";
-import { Satribute } from "./sats";
+import { Inscription } from "./inscription";
+import { Satribute } from "./sat";
 import { Brc20Activity, InscriptionActivity, RunicTx } from "./tx";
 
 export interface RuneBalance {

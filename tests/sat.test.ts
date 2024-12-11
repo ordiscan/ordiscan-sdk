@@ -2,6 +2,7 @@ import { expect, test } from "vitest";
 
 import { mock, ordiscan } from "./utils";
 import { MOCK_SAT } from "./mocks/rareSat";
+import { SatSchema } from "../src/resources/sat";
 
 const SAT_NUMBER = 392_052_419_460;
 
@@ -13,6 +14,7 @@ test("get sat by number", async () => {
   const sat = await ordiscan.sat.get(SAT_NUMBER);
 
   expect(sat.satributes.length).toBe(2);
+  expect(SatSchema.parse(sat)).toBeTruthy();
 });
 
 const UTXO =

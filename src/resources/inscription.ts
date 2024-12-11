@@ -12,7 +12,10 @@ export const InscriptionSchema = z
     owner_address: z.string(),
     owner_output: z.string(),
     timestamp: z.string(),
-    metadata: z.null(), // TODO
+    metadata: z
+      .string()
+      .or(z.record(z.string(), z.string().or(z.number())))
+      .nullable(),
     metaprotocol: z.string().nullable(),
     sat: z.number(),
     content_url: z.string(),
@@ -45,6 +48,8 @@ export class InscriptionResource extends BaseResource {
     before?: number;
     after?: number;
   } = {}): Promise<Inscription[]> {
+    let url = "/inscriptions";
+
     const params = new URLSearchParams();
 
     if (sort) {
@@ -59,9 +64,11 @@ export class InscriptionResource extends BaseResource {
       params.append("after", after.toString());
     }
 
-    return this.client.fetch<Inscription[]>(
-      `/inscriptions?${params.toString()}`,
-    );
+    if (params.size) {
+      url += `?${params.toString()}`;
+    }
+
+    return this.client.fetch<Inscription[]>(url);
   }
 
   async getTransfers({

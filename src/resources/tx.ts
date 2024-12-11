@@ -1,5 +1,5 @@
 import { Ordiscan } from "../client";
-import { Inscription } from "./inscriptions";
+import { Inscription } from "./inscription";
 
 interface RunestoneMessage {
   rune: string;

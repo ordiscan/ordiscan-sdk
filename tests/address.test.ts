@@ -14,6 +14,11 @@ import {
   RuneBalanceSchema,
   SatributeBalanceSchema,
 } from "../src/resources/address";
+import {
+  Brc20ActivitySchema,
+  InscriptionActivitySchema,
+  RunicTxSchema,
+} from "../src/resources/tx";
 
 test("list all inscriptions from address", async () => {
   const ADDRESS = "bc1qctx9fzhzf4253ka7jd2s0sf5fqvzffnfvpk5wn";
@@ -92,7 +97,7 @@ test("list all inscriptions activity for address", async () => {
 
   const activity = await ordiscan.address(ADDRESS).inscriptionActivity();
 
-  expect(activity.length).toBeGreaterThan(0);
+  expect(InscriptionActivitySchema.parse(activity[0])).toBeTruthy();
 });
 
 test("list all inscriptions activity for address (with params)", async () => {
@@ -120,6 +125,7 @@ test("list all runes activity for address", async () => {
   const activity = await ordiscan.address(ADDRESS).runesActivity();
 
   expect(activity.length).toBeGreaterThan(0);
+  expect(RunicTxSchema.parse(activity[0])).toBeTruthy();
 });
 
 test("list all runes activity for address (with params)", async () => {
@@ -148,6 +154,7 @@ test("list all BRC-20 activity for address", async () => {
   const activity = await ordiscan.address(ADDRESS).brc20Activity();
 
   expect(activity.length).toBeGreaterThan(0);
+  expect(Brc20ActivitySchema.parse(activity[0])).toBeTruthy();
 });
 
 test("list all BRC-20 activity for address (with params)", async () => {

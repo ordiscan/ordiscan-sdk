@@ -22,13 +22,15 @@ export const RuneBaseSchema = z
   })
   .strict();
 
+export type Rune = z.infer<typeof RuneBaseSchema>;
+
 // When getting a specific rune:
 export const RuneWithSupplySchema = RuneBaseSchema.extend({
   current_supply: z.string(),
   current_mint_count: z.number(),
 });
 
-export type RuneInfo = z.infer<typeof RuneBaseSchema>;
+export type RuneWithSupply = z.infer<typeof RuneWithSupplySchema>;
 
 export const RuneMarketInfoSchema = z
   .object({
@@ -61,7 +63,7 @@ export class RuneResource extends BaseResource {
     sort?: "newest" | "oldest";
     after?: number;
     before?: number;
-  } = {}): Promise<RuneInfo[]> {
+  } = {}): Promise<Rune[]> {
     const params = new URLSearchParams();
 
     let url = "/runes";
@@ -82,11 +84,11 @@ export class RuneResource extends BaseResource {
       url += `?${params.toString()}`;
     }
 
-    return this.client.fetch<RuneInfo[]>(url);
+    return this.client.fetch<Rune[]>(url);
   }
 
   async getInfo({ name }: { name: string }) {
-    return this.client.fetch<RuneInfo>(`/rune/${name}`);
+    return this.client.fetch<Rune>(`/rune/${name}`);
   }
 
   async getMarketInfo({ name }: { name: string }) {

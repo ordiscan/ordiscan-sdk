@@ -6,7 +6,7 @@ import { MOCK_INSCRIPTION_TRANSFER } from "./mocks/tx";
 import { InscriptionSchema } from "../src/resources/inscription";
 
 test("list all inscriptions (with params)", async () => {
-  mock(`/inscriptions?sort=inscription_number_desc&after=20`)?.reply(200, {
+  mock(`/inscriptions?sort=inscription_number_asc&after=0`)?.reply(200, {
     data: [MOCK_INSCRIPTION, MOCK_INSCRIPTION],
   });
 

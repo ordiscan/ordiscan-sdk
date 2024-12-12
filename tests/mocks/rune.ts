@@ -2,11 +2,12 @@ import { type RuneBalance } from "../../src/resources/address";
 import { type RunicTx } from "../../src/resources/tx";
 import {
   type RuneName,
-  type RuneInfo,
+  type Rune,
+  type RuneWithSupply,
   type RuneMarketInfo,
 } from "../../src/resources/rune";
 
-export const MOCK_RUNE_INFO: RuneInfo = {
+export const MOCK_RUNE_INFO: Rune = {
   id: "1:0",
   name: "UNCOMMONGOODS",
   formatted_name: "UNCOMMON•GOODS",
@@ -22,6 +23,10 @@ export const MOCK_RUNE_INFO: RuneInfo = {
   premined_supply: "0",
   mint_start_block: 840000,
   mint_end_block: 1050000,
+};
+
+export const MOCK_RUNE_WITH_SUPPLY: RuneWithSupply = {
+  ...MOCK_RUNE_INFO,
   current_supply: "36303629",
   current_mint_count: 36303629,
 };

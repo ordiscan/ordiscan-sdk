@@ -9,6 +9,7 @@ import {
   MOCK_RUNE_INFO,
   MOCK_RUNE_MARKET_INFO,
   MOCK_RUNE_NAME,
+  MOCK_RUNE_WITH_SUPPLY,
 } from "./mocks/rune";
 
 import { mock, ordiscan } from "./utils";
@@ -42,7 +43,7 @@ test("list runes (with params)", async () => {
 
 test("get rune info", async () => {
   mock(`/rune/${RUNE_NAME}`)?.reply(200, {
-    data: MOCK_RUNE_INFO,
+    data: MOCK_RUNE_WITH_SUPPLY,
   });
 
   const rune = await ordiscan.rune.getInfo({ name: RUNE_NAME });

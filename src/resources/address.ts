@@ -26,11 +26,24 @@ export const SatributeBalanceSchema = z.object({
 
 export type SatributeBalance = z.infer<typeof SatributeBalanceSchema>;
 
+export const UtxoSchema = z.object({
+  outpoint: z.string(),
+  value: z.number(),
+  runes: z.array(RuneBalanceSchema),
+  inscriptions: z.array(z.string()),
+});
+
+export type Utxo = z.infer<typeof UtxoSchema>;
+
 export class Address {
   constructor(
     private readonly client: Ordiscan,
     private readonly address: string,
   ) {}
+
+  async utxos() {
+    return this.client.fetch<Utxo[]>(`/address/${this.address}/utxos`);
+  }
 
   async inscriptions({ page }: { page?: number } = {}) {
     let url = `/address/${this.address}/inscriptions`;

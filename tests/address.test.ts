@@ -13,12 +13,28 @@ import {
   Brc20BalanceSchema,
   RuneBalanceSchema,
   SatributeBalanceSchema,
+  UtxoSchema,
 } from "../src/resources/address";
 import {
   Brc20ActivitySchema,
   InscriptionActivitySchema,
   RunicTxSchema,
 } from "../src/resources/tx";
+import { MOCK_UTXO } from "./mocks/utxo";
+
+test("list all UTXOs from address", async () => {
+  const ADDRESS =
+    "bc1plcx7gv8a48479e5ut4zg2c23q8cuptzxuhzqw5mjqx3qxn855nhqexy4g3";
+
+  mock(`/address/${ADDRESS}/utxos`)?.reply(200, {
+    data: [MOCK_UTXO],
+  });
+
+  const utxos = await ordiscan.address(ADDRESS).utxos();
+
+  expect(utxos.length).toBeGreaterThan(0);
+  expect(UtxoSchema.parse(utxos[0])).toBeTruthy();
+});
 
 test("list all inscriptions from address", async () => {
   const ADDRESS = "bc1qctx9fzhzf4253ka7jd2s0sf5fqvzffnfvpk5wn";

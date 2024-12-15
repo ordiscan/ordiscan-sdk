@@ -30,10 +30,10 @@ export class Ordiscan {
   public readonly collection: CollectionResource;
   public readonly utxo: UtxoResource;
 
-  constructor(config: OrdiscanConfig) {
-    this.auth = config.auth;
-    this.baseUrl = config.baseUrl || DEFAULT_BASE_URL;
-    this.version = config.version || "v1";
+  constructor(apiKey: string, config?: OrdiscanConfig) {
+    this.auth = apiKey;
+    this.baseUrl = config?.baseUrl || DEFAULT_BASE_URL;
+    this.version = config?.version || "v1";
 
     // Initialize resources
     this.address = new AddressResource(this);

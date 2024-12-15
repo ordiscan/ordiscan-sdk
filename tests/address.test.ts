@@ -8,6 +8,8 @@ import {
 import { MOCK_RUNE_BALANCE, MOCK_RUNIC_TX } from "./mocks/rune";
 import { MOCK_BRC20_BALANCE, MOCK_BRC20_ACTIVITY } from "./mocks/brc20";
 import { MOCK_RARE_SAT_BALANCE } from "./mocks/rareSat";
+import { MOCK_UTXO } from "./mocks/utxo";
+
 import { InscriptionSchema } from "../src/resources/inscription";
 import {
   Brc20BalanceSchema,
@@ -20,7 +22,6 @@ import {
   InscriptionActivitySchema,
   RunicTxSchema,
 } from "../src/resources/tx";
-import { MOCK_UTXO } from "./mocks/utxo";
 
 test("list all UTXOs from address", async () => {
   const ADDRESS =

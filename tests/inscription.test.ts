@@ -1,9 +1,17 @@
 import { expect, test } from "vitest";
 
 import { mock, ordiscan } from "./utils";
-import { MOCK_BRC20_INSCRIPTION, MOCK_INSCRIPTION } from "./mocks/inscription";
+import {
+  MOCK_BRC20_INSCRIPTION,
+  MOCK_INSCRIPTION,
+  MOCK_INSCRIPTION_TRAIT,
+} from "./mocks/inscription";
 import { MOCK_INSCRIPTION_TRANSFER } from "./mocks/tx";
-import { InscriptionSchema } from "../src/resources/inscription";
+import {
+  InscriptionSchema,
+  InscriptionTraitSchema,
+} from "../src/resources/inscription";
+import { InscriptionTransferSchema } from "../src/resources/tx";
 
 test("list all inscriptions (with params)", async () => {
   mock(`/inscriptions?sort=inscription_number_asc&after=0`)?.reply(200, {
@@ -92,5 +100,20 @@ test("list inscription transfers", async () => {
     inscriptionId: id,
   });
 
-  expect(transfers[0].inscription_id).toBeTypeOf("string");
+  expect(InscriptionTransferSchema.parse(transfers[0])).toBeTruthy();
+});
+
+test("list inscription traits", async () => {
+  const id =
+    "783513f2044d48fdf303e58b1d8878a2394a695e2a9cac320c4823f09524a296i0";
+
+  mock(`/inscription/${id}/traits`)?.reply(200, {
+    data: [MOCK_INSCRIPTION_TRAIT],
+  });
+
+  const traits = await ordiscan.inscription.getTraits({
+    inscriptionId: id,
+  });
+
+  expect(InscriptionTraitSchema.parse(traits[0])).toBeTruthy();
 });

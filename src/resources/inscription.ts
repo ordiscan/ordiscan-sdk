@@ -5,6 +5,14 @@ import { Brc20ActionSchema } from "./brc20";
 import { SatributeSchema } from "./sat";
 import { InscriptionTransfer } from "./tx";
 
+export const InscriptionTraitSchema = z.object({
+  name: z.string(),
+  value: z.string(),
+  rarity: z.number(),
+});
+
+export type InscriptionTrait = z.infer<typeof InscriptionTraitSchema>;
+
 export const InscriptionSchema = z
   .object({
     inscription_id: z.string(),
@@ -82,6 +90,16 @@ export class InscriptionResource extends BaseResource {
   }): Promise<InscriptionTransfer[]> {
     return this.client.fetch<InscriptionTransfer[]>(
       `/inscription/${inscriptionId}/activity`,
+    );
+  }
+
+  async getTraits({
+    inscriptionId,
+  }: {
+    inscriptionId: string;
+  }): Promise<InscriptionTrait[]> {
+    return this.client.fetch<InscriptionTrait[]>(
+      `/inscription/${inscriptionId}/traits`,
     );
   }
 }

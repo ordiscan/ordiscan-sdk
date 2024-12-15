@@ -1,4 +1,4 @@
-import { Inscription } from "../../src/resources/inscription";
+import { Inscription, InscriptionTrait } from "../../src/resources/inscription";
 import { InscriptionActivity } from "../../src/resources/tx";
 
 export const MOCK_INSCRIPTION: Inscription = {
@@ -71,4 +71,10 @@ export const MOCK_INSCRIPTION_ACTIVITY: InscriptionActivity = {
   spent_as_fee: false,
   timestamp: "2024-11-07T20:44:52.124Z",
   confirmed: true,
+};
+
+export const MOCK_INSCRIPTION_TRAIT: InscriptionTrait = {
+  name: "Background",
+  value: "Bitcoin Orange",
+  rarity: 8,
 };

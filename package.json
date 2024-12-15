@@ -10,13 +10,13 @@
   ],
   "scripts": {
     "build": "tsc",
-    "lint": "eslint src --ext .ts",
     "test": "vitest",
     "prepublishOnly": "npm run build",
     "prepare": "husky"
   },
   "keywords": [
     "ordinals",
+    "runes",
     "bitcoin",
     "ordiscan",
     "api"

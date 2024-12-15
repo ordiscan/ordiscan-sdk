@@ -25,6 +25,8 @@ export const InscriptionSchema = z
     submodules: z.array(z.string()),
     genesis_address: z.string(),
     genesis_output: z.string(),
+    collection_slug: z.string().nullable(),
+    sats_name: z.string().nullable(),
   })
   .strict();
 

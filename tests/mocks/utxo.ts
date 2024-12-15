@@ -1,4 +1,4 @@
-import { Utxo } from "@/resources/address";
+import { Utxo } from "@/schemas/utxo";
 
 export const MOCK_UTXO: Utxo = {
   outpoint:

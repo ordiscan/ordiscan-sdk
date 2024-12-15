@@ -1,5 +1,5 @@
-import { Inscription, InscriptionTrait } from "@/resources/inscription";
-import { InscriptionActivity } from "@/resources/tx";
+import { Inscription, InscriptionTrait } from "@/schemas/inscription";
+import { InscriptionActivity } from "@/schemas/inscriptionTx";
 
 export const MOCK_INSCRIPTION: Inscription = {
   inscription_id:

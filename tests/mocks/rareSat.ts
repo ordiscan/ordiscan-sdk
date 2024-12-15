@@ -1,7 +1,6 @@
-import { SatributeBalance } from "@/resources/address";
-import { Sat } from "@/resources/sat";
+import { RareSatBalance, Sat } from "@/schemas/sat";
 
-export const MOCK_RARE_SAT_BALANCE: SatributeBalance = {
+export const MOCK_RARE_SAT_BALANCE: RareSatBalance = {
   satributes: ["UNCOMMON", "ALPHA"],
   ranges: [
     [1293460000000000, 1293460000000001],

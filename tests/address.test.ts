@@ -1,17 +1,12 @@
 import { expect, test } from "vitest";
 
-import {
-  Brc20BalanceSchema,
-  RuneBalanceSchema,
-  SatributeBalanceSchema,
-  UtxoSchema,
-} from "@/resources/address";
-import { InscriptionSchema } from "@/resources/inscription";
-import {
-  Brc20ActivitySchema,
-  InscriptionActivitySchema,
-  RunicTxSchema,
-} from "@/resources/tx";
+import { Brc20ActivitySchema, Brc20BalanceSchema } from "@/schemas/brc20";
+import { InscriptionSchema } from "@/schemas/inscription";
+import { InscriptionActivitySchema } from "@/schemas/inscriptionTx";
+import { RuneBalanceSchema } from "@/schemas/rune";
+import { RunicTxSchema } from "@/schemas/runicTx";
+import { RareSatBalanceSchema } from "@/schemas/sat";
+import { UtxoSchema } from "@/schemas/utxo";
 
 import { MOCK_BRC20_BALANCE, MOCK_BRC20_ACTIVITY } from "tests/mocks/brc20";
 import {
@@ -21,6 +16,7 @@ import {
 import { MOCK_RARE_SAT_BALANCE } from "tests/mocks/rareSat";
 import { MOCK_RUNE_BALANCE, MOCK_RUNIC_TX } from "tests/mocks/rune";
 import { MOCK_UTXO } from "tests/mocks/utxo";
+
 import { mock, ordiscan } from "tests/utils";
 
 test("list all UTXOs from address", async () => {
@@ -113,7 +109,7 @@ test("list all rare sats from address", async () => {
     address: ADDRESS,
   });
 
-  expect(SatributeBalanceSchema.parse(rareSatBalances[0])).toBeTruthy();
+  expect(RareSatBalanceSchema.parse(rareSatBalances[0])).toBeTruthy();
 });
 
 test("list all inscription activity for address", async () => {

@@ -1,8 +1,9 @@
 import { expect, test } from "vitest";
 
-import { SatributeBalanceSchema } from "@/resources/address";
+import { RareSatBalanceSchema } from "@/schemas/sat";
 
 import { MOCK_RARE_SAT_BALANCE } from "tests/mocks/rareSat";
+
 import { mock, ordiscan } from "tests/utils";
 
 test("get sat ranges for UTXO", async () => {
@@ -31,5 +32,5 @@ test("get rare sats for UTXO", async () => {
   const rareSats = await ordiscan.utxo.getRareSats({ utxo: UTXO });
 
   expect(rareSats.length).toBeGreaterThan(0);
-  expect(SatributeBalanceSchema.parse(rareSats[0])).toBeTruthy();
+  expect(RareSatBalanceSchema.parse(rareSats[0])).toBeTruthy();
 });

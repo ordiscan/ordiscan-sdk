@@ -1,24 +1,6 @@
-import { z } from "zod";
-
 import { BaseResource } from "@/resources/base";
 
-export const Brc20ActionTypeSchema = z.enum(["TRANSFER", "MINT", "DEPLOY"]);
-
-export const Brc20ActionSchema = z.object({
-  tick: z.string(),
-  type: Brc20ActionTypeSchema,
-});
-
-export const Brc20TokenSchema = z
-  .object({
-    tick: z.string(),
-    minted: z.number(),
-    max_supply: z.number(),
-    price: z.number().nullable(),
-  })
-  .strict();
-
-export type Brc20Token = z.infer<typeof Brc20TokenSchema>;
+import { Brc20Token } from "@/schemas/brc20";
 
 export class Brc20Resource extends BaseResource {
   async list({

@@ -3,7 +3,14 @@ const config = {
   semi: true,
   trailingComma: "all",
   importOrderSeparation: true,
-  importOrder: ["^@/resources/(.*)$", "^@/(.*)$", "^tests/(.*)$", "^[./]"],
+  importOrder: [
+    "^@/resources/(.*)$",
+    "^@/schemas/(.*)$",
+    "^@/(.*)$",
+    "^tests/mocks/(.*)$",
+    "^tests/(.*)$",
+    "^[./]",
+  ],
   plugins: [require.resolve("@trivago/prettier-plugin-sort-imports")],
 };
 

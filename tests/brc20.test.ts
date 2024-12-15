@@ -1,8 +1,9 @@
 import { expect, test } from "vitest";
 
-import { Brc20TokenSchema } from "@/resources/brc20";
+import { Brc20TokenSchema } from "@/schemas/brc20";
 
 import { MOCK_BRC20_INFO } from "tests/mocks/brc20";
+
 import { mock, ordiscan } from "tests/utils";
 
 const TOKEN_NAME = "ordi";

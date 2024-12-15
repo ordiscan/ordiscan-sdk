@@ -1,39 +1,12 @@
-import { z } from "zod";
-
 import { BaseResource } from "@/resources/base";
-import { Inscription } from "@/resources/inscription";
-import { SatributeSchema } from "@/resources/sat";
-import { Brc20Activity, InscriptionActivity, RunicTx } from "@/resources/tx";
 
-export const RuneBalanceSchema = z.object({
-  name: z.string(),
-  balance: z.string(),
-});
-
-export type RuneBalance = z.infer<typeof RuneBalanceSchema>;
-
-export const Brc20BalanceSchema = z.object({
-  tick: z.string(),
-  balance: z.number(),
-});
-
-export type Brc20Balance = z.infer<typeof Brc20BalanceSchema>;
-
-export const SatributeBalanceSchema = z.object({
-  satributes: z.array(SatributeSchema),
-  ranges: z.array(z.array(z.number())),
-});
-
-export type SatributeBalance = z.infer<typeof SatributeBalanceSchema>;
-
-export const UtxoSchema = z.object({
-  outpoint: z.string(),
-  value: z.number(),
-  runes: z.array(RuneBalanceSchema),
-  inscriptions: z.array(z.string()),
-});
-
-export type Utxo = z.infer<typeof UtxoSchema>;
+import { Brc20Activity, Brc20Balance } from "@/schemas/brc20";
+import { Inscription } from "@/schemas/inscription";
+import { InscriptionActivity } from "@/schemas/inscriptionTx";
+import { RuneBalance } from "@/schemas/rune";
+import { RunicTx } from "@/schemas/runicTx";
+import { RareSatBalance } from "@/schemas/sat";
+import { Utxo } from "@/schemas/utxo";
 
 export class AddressResource extends BaseResource {
   async getUtxos({ address }: { address: string }) {
@@ -59,9 +32,7 @@ export class AddressResource extends BaseResource {
   }
 
   async getRareSats({ address }: { address: string }) {
-    return this.client.fetch<SatributeBalance[]>(
-      `/address/${address}/rare-sats`,
-    );
+    return this.client.fetch<RareSatBalance[]>(`/address/${address}/rare-sats`);
   }
 
   async getInscriptionActivity({

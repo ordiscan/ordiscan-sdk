@@ -3,8 +3,8 @@ import { expect, test } from "vitest";
 import {
   InscriptionSchema,
   InscriptionTraitSchema,
-} from "@/resources/inscription";
-import { InscriptionTransferSchema } from "@/resources/tx";
+} from "@/schemas/inscription";
+import { InscriptionTransferSchema } from "@/schemas/inscriptionTx";
 
 import {
   MOCK_BRC20_INSCRIPTION,
@@ -12,6 +12,7 @@ import {
   MOCK_INSCRIPTION_TRAIT,
 } from "tests/mocks/inscription";
 import { MOCK_INSCRIPTION_TRANSFER } from "tests/mocks/tx";
+
 import { mock, ordiscan } from "tests/utils";
 
 test("list all inscriptions (with params)", async () => {

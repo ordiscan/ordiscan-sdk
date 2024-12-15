@@ -1,6 +1,4 @@
-import { Brc20Balance } from "@/resources/address";
-import { Brc20Token } from "@/resources/brc20";
-import { Brc20Activity } from "@/resources/tx";
+import { Brc20Activity, Brc20Balance, Brc20Token } from "@/schemas/brc20";
 
 export const MOCK_BRC20_INFO: Brc20Token = {
   tick: "ORDI",

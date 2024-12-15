@@ -1,11 +1,11 @@
 import { expect, test } from "vitest";
 
 import {
+  RuneBaseSchema,
   RuneMarketInfoSchema,
   RuneNameSchema,
-  RuneBaseSchema,
   RuneWithSupplySchema,
-} from "@/resources/rune";
+} from "@/schemas/rune";
 
 import {
   MOCK_RUNE_INFO,
@@ -13,6 +13,7 @@ import {
   MOCK_RUNE_NAME,
   MOCK_RUNE_WITH_SUPPLY,
 } from "tests/mocks/rune";
+
 import { mock, ordiscan } from "tests/utils";
 
 const RUNE_NAME = "UNCOMMONGOODS";

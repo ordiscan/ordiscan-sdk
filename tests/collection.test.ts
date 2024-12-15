@@ -1,8 +1,9 @@
 import { expect, test } from "vitest";
 
-import { CollectionSchema } from "@/resources/collection";
+import { CollectionSchema } from "@/schemas/collection";
 
 import { MOCK_COLLECTION } from "tests/mocks/collection";
+
 import { mock, ordiscan } from "tests/utils";
 
 test("list collections", async () => {

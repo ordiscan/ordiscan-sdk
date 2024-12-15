@@ -12,6 +12,7 @@ import { RuneResource } from "./resources/rune";
 import { Brc20Resource } from "./resources/brc20";
 import { SatResource } from "./resources/sat";
 import { CollectionResource } from "./resources/collection";
+import { UtxoResource } from "./resources/utxo";
 
 const DEFAULT_BASE_URL = "https://api.ordiscan.com/v1";
 
@@ -28,6 +29,7 @@ export class Ordiscan {
   public readonly sat: SatResource;
   public readonly brc20: Brc20Resource;
   public readonly collection: CollectionResource;
+  public readonly utxo: UtxoResource;
 
   constructor(config: OrdiscanConfig) {
     this.auth = config.auth;
@@ -43,6 +45,7 @@ export class Ordiscan {
     this.sat = new SatResource(this);
     this.brc20 = new Brc20Resource(this);
     this.collection = new CollectionResource(this);
+    this.utxo = new UtxoResource(this);
   }
 
   private get apiUrl(): string {

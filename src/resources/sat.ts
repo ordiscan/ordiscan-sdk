@@ -42,11 +42,7 @@ export type Sat = z.infer<typeof SatSchema>;
 export type SatRange = [number, number];
 
 export class SatResource extends BaseResource {
-  async get(satNumber: number): Promise<Sat> {
+  async getInfo(satNumber: number): Promise<Sat> {
     return this.client.fetch<Sat>(`/sat/${satNumber}`);
-  }
-
-  async list({ utxo }: { utxo: string }): Promise<SatRange[]> {
-    return this.client.fetch<SatRange[]>(`/utxo/${utxo}/sat-ranges`);
   }
 }

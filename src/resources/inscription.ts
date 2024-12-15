@@ -1,9 +1,9 @@
 import { z } from "zod";
 
-import { BaseResource } from "./base";
-import { Brc20ActionSchema } from "./brc20";
-import { SatributeSchema } from "./sat";
-import { InscriptionTransfer } from "./tx";
+import { BaseResource } from "@/resources/base";
+import { Brc20ActionSchema } from "@/resources/brc20";
+import { SatributeSchema } from "@/resources/sat";
+import { InscriptionTransfer } from "@/resources/tx";
 
 export const InscriptionTraitSchema = z.object({
   name: z.string(),

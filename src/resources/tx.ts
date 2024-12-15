@@ -1,8 +1,8 @@
 import { z } from "zod";
 
-import { BaseResource } from "./base";
-import { Brc20ActionTypeSchema } from "./brc20";
-import { Inscription } from "./inscription";
+import { BaseResource } from "@/resources/base";
+import { Brc20ActionTypeSchema } from "@/resources/brc20";
+import { Inscription } from "@/resources/inscription";
 
 export const RunestoneMessageSchema = z.object({
   rune: z.string(),
@@ -95,7 +95,7 @@ export class TxResource extends BaseResource {
     return this.client.fetch<TxInfo>(`/tx/${txid}`);
   }
 
-  async getInscriptions({ txid }: { txid: string }) {
+  async getNewInscriptions({ txid }: { txid: string }) {
     return this.client.fetch<Inscription[]>(`/tx/${txid}/inscriptions`);
   }
 

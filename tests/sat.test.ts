@@ -1,8 +1,9 @@
 import { expect, test } from "vitest";
 
-import { mock, ordiscan } from "./utils";
-import { MOCK_SAT } from "./mocks/rareSat";
-import { SatSchema } from "../src/resources/sat";
+import { SatSchema } from "@/resources/sat";
+
+import { MOCK_SAT } from "tests/mocks/rareSat";
+import { mock, ordiscan } from "tests/utils";
 
 const SAT_NUMBER = 392_052_419_460;
 

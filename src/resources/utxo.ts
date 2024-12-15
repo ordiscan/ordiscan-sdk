@@ -1,7 +1,6 @@
-import { SatributeBalance } from "./address";
-import { BaseResource } from "./base";
-
-import { SatRange } from "./sat";
+import { SatributeBalance } from "@/resources/address";
+import { BaseResource } from "@/resources/base";
+import { SatRange } from "@/resources/sat";
 
 export class UtxoResource extends BaseResource {
   async getSatRanges({ utxo }: { utxo: string }): Promise<SatRange[]> {

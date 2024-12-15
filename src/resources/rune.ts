@@ -1,5 +1,6 @@
 import { z } from "zod";
-import { BaseResource } from "./base";
+
+import { BaseResource } from "@/resources/base";
 
 // When getting a list of runes:
 export const RuneBaseSchema = z

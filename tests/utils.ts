@@ -1,6 +1,6 @@
 import nock from "nock";
 
-import { Ordiscan } from "../src";
+import { Ordiscan } from "@/index";
 
 const DEFAULT_TEST_BASE_URL = "http://localhost:3000";
 const DEFAULT_TEST_ACCESS_TOKEN = "xyz";

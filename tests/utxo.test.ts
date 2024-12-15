@@ -1,8 +1,9 @@
 import { expect, test } from "vitest";
-import { SatributeBalanceSchema } from "../src/resources/address";
-import { MOCK_RARE_SAT_BALANCE } from "./mocks/rareSat";
 
-import { mock, ordiscan } from "./utils";
+import { SatributeBalanceSchema } from "@/resources/address";
+
+import { MOCK_RARE_SAT_BALANCE } from "tests/mocks/rareSat";
+import { mock, ordiscan } from "tests/utils";
 
 test("get sat ranges for UTXO", async () => {
   const UTXO =

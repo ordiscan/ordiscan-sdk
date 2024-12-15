@@ -1,8 +1,8 @@
-import { Brc20Balance } from "../../src/resources/address";
-import { Brc20Info } from "../../src/resources/brc20";
-import { Brc20Activity } from "../../src/resources/tx";
+import { Brc20Balance } from "@/resources/address";
+import { Brc20Token } from "@/resources/brc20";
+import { Brc20Activity } from "@/resources/tx";
 
-export const MOCK_BRC20_INFO: Brc20Info = {
+export const MOCK_BRC20_INFO: Brc20Token = {
   tick: "ORDI",
   max_supply: 21000000,
   minted: 21000000,

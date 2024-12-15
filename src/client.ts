@@ -1,18 +1,18 @@
+import { AddressResource } from "@/resources/address";
+import { Brc20Resource } from "@/resources/brc20";
+import { CollectionResource } from "@/resources/collection";
+import { InscriptionResource } from "@/resources/inscription";
+import { RuneResource } from "@/resources/rune";
+import { SatResource } from "@/resources/sat";
+import { TxResource } from "@/resources/tx";
+import { UtxoResource } from "@/resources/utxo";
+
 import {
   ApiVersion,
   ErrResponse,
   OrdiscanConfig,
   OrdiscanError,
-} from "./types";
-
-import { InscriptionResource } from "./resources/inscription";
-import { AddressResource } from "./resources/address";
-import { TxResource } from "./resources/tx";
-import { RuneResource } from "./resources/rune";
-import { Brc20Resource } from "./resources/brc20";
-import { SatResource } from "./resources/sat";
-import { CollectionResource } from "./resources/collection";
-import { UtxoResource } from "./resources/utxo";
+} from "@/types";
 
 const DEFAULT_BASE_URL = "https://api.ordiscan.com/v1";
 

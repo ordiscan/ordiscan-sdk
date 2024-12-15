@@ -1,11 +1,11 @@
-import { type RuneBalance } from "../../src/resources/address";
-import { type RunicTx } from "../../src/resources/tx";
+import { type RuneBalance } from "@/resources/address";
 import {
   type RuneName,
   type Rune,
   type RuneWithSupply,
   type RuneMarketInfo,
-} from "../../src/resources/rune";
+} from "@/resources/rune";
+import { type RunicTx } from "@/resources/tx";
 
 export const MOCK_RUNE_INFO: Rune = {
   id: "1:0",

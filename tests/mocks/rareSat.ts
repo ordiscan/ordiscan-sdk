@@ -1,5 +1,5 @@
-import { SatributeBalance } from "../../src/resources/address";
-import { Sat } from "../../src/resources/sats";
+import { SatributeBalance } from "@/resources/address";
+import { Sat } from "@/resources/sat";
 
 export const MOCK_RARE_SAT_BALANCE: SatributeBalance = {
   satributes: ["UNCOMMON", "ALPHA"],

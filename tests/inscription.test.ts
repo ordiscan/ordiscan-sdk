@@ -1,17 +1,18 @@
 import { expect, test } from "vitest";
 
-import { mock, ordiscan } from "./utils";
+import {
+  InscriptionSchema,
+  InscriptionTraitSchema,
+} from "@/resources/inscription";
+import { InscriptionTransferSchema } from "@/resources/tx";
+
 import {
   MOCK_BRC20_INSCRIPTION,
   MOCK_INSCRIPTION,
   MOCK_INSCRIPTION_TRAIT,
-} from "./mocks/inscription";
-import { MOCK_INSCRIPTION_TRANSFER } from "./mocks/tx";
-import {
-  InscriptionSchema,
-  InscriptionTraitSchema,
-} from "../src/resources/inscription";
-import { InscriptionTransferSchema } from "../src/resources/tx";
+} from "tests/mocks/inscription";
+import { MOCK_INSCRIPTION_TRANSFER } from "tests/mocks/tx";
+import { mock, ordiscan } from "tests/utils";
 
 test("list all inscriptions (with params)", async () => {
   mock(`/inscriptions?sort=inscription_number_asc&after=0`)?.reply(200, {

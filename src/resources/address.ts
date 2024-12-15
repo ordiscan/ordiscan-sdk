@@ -1,9 +1,9 @@
 import { z } from "zod";
 
-import { BaseResource } from "./base";
-import { Inscription } from "./inscription";
-import { SatributeSchema } from "./sat";
-import { Brc20Activity, InscriptionActivity, RunicTx } from "./tx";
+import { BaseResource } from "@/resources/base";
+import { Inscription } from "@/resources/inscription";
+import { SatributeSchema } from "@/resources/sat";
+import { Brc20Activity, InscriptionActivity, RunicTx } from "@/resources/tx";
 
 export const RuneBalanceSchema = z.object({
   name: z.string(),

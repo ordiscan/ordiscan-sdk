@@ -1,27 +1,27 @@
 import { expect, test } from "vitest";
 
-import { mock, ordiscan } from "./utils";
-import {
-  MOCK_INSCRIPTION,
-  MOCK_INSCRIPTION_ACTIVITY,
-} from "./mocks/inscription";
-import { MOCK_RUNE_BALANCE, MOCK_RUNIC_TX } from "./mocks/rune";
-import { MOCK_BRC20_BALANCE, MOCK_BRC20_ACTIVITY } from "./mocks/brc20";
-import { MOCK_RARE_SAT_BALANCE } from "./mocks/rareSat";
-import { MOCK_UTXO } from "./mocks/utxo";
-
-import { InscriptionSchema } from "../src/resources/inscription";
 import {
   Brc20BalanceSchema,
   RuneBalanceSchema,
   SatributeBalanceSchema,
   UtxoSchema,
-} from "../src/resources/address";
+} from "@/resources/address";
+import { InscriptionSchema } from "@/resources/inscription";
 import {
   Brc20ActivitySchema,
   InscriptionActivitySchema,
   RunicTxSchema,
-} from "../src/resources/tx";
+} from "@/resources/tx";
+
+import { MOCK_BRC20_BALANCE, MOCK_BRC20_ACTIVITY } from "tests/mocks/brc20";
+import {
+  MOCK_INSCRIPTION,
+  MOCK_INSCRIPTION_ACTIVITY,
+} from "tests/mocks/inscription";
+import { MOCK_RARE_SAT_BALANCE } from "tests/mocks/rareSat";
+import { MOCK_RUNE_BALANCE, MOCK_RUNIC_TX } from "tests/mocks/rune";
+import { MOCK_UTXO } from "tests/mocks/utxo";
+import { mock, ordiscan } from "tests/utils";
 
 test("list all UTXOs from address", async () => {
   const ADDRESS =

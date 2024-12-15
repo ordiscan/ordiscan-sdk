@@ -1,4 +1,4 @@
-import { InscriptionTransfer, TxInfo } from "../../src/resources/tx";
+import { InscriptionTransfer, TxInfo } from "@/resources/tx";
 
 export const MOCK_TX_INFO: TxInfo = {
   txid: "2dc8414b21accf4a54421cadaa00166bfa64bb1d5019c99b151897fa0bb71534",

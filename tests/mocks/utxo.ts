@@ -1,4 +1,4 @@
-import { Utxo } from "../../src/resources/address";
+import { Utxo } from "@/resources/address";
 
 export const MOCK_UTXO: Utxo = {
   outpoint:

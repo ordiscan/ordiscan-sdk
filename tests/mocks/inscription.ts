@@ -1,5 +1,5 @@
-import { Inscription, InscriptionTrait } from "../../src/resources/inscription";
-import { InscriptionActivity } from "../../src/resources/tx";
+import { Inscription, InscriptionTrait } from "@/resources/inscription";
+import { InscriptionActivity } from "@/resources/tx";
 
 export const MOCK_INSCRIPTION: Inscription = {
   inscription_id:

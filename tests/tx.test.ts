@@ -1,9 +1,9 @@
 import { expect, test } from "vitest";
-import { MOCK_INSCRIPTION } from "./mocks/inscription";
-import { MOCK_RUNIC_TX } from "./mocks/rune";
-import { MOCK_INSCRIPTION_TRANSFER, MOCK_TX_INFO } from "./mocks/tx";
 
-import { mock, ordiscan } from "./utils";
+import { MOCK_INSCRIPTION } from "tests/mocks/inscription";
+import { MOCK_RUNIC_TX } from "tests/mocks/rune";
+import { MOCK_INSCRIPTION_TRANSFER, MOCK_TX_INFO } from "tests/mocks/tx";
+import { mock, ordiscan } from "tests/utils";
 
 test("get tx info", async () => {
   const TXID =
@@ -27,7 +27,7 @@ test("get inscriptions from tx", async () => {
     data: [MOCK_INSCRIPTION],
   });
 
-  const inscriptions = await ordiscan.tx.getInscriptions({
+  const inscriptions = await ordiscan.tx.getNewInscriptions({
     txid: TXID,
   });
 

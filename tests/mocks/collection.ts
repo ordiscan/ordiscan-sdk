@@ -1,4 +1,4 @@
-import { Collection } from "../../src/resources/collection";
+import { Collection } from "@/resources/collection";
 
 export const MOCK_COLLECTION: Collection = {
   name: "Taproot Wizards",

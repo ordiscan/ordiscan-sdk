@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 import { BaseResource } from "./base";
+import { Brc20ActionSchema } from "./brc20";
 import { SatributeSchema } from "./sat";
 import { InscriptionTransfer } from "./tx";
 
@@ -27,6 +28,7 @@ export const InscriptionSchema = z
     genesis_output: z.string(),
     collection_slug: z.string().nullable(),
     sats_name: z.string().nullable(),
+    brc20_action: Brc20ActionSchema.nullable(),
   })
   .strict();
 

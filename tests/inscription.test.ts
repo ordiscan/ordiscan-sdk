@@ -1,7 +1,7 @@
 import { expect, test } from "vitest";
 
 import { mock, ordiscan } from "./utils";
-import { MOCK_INSCRIPTION } from "./mocks/inscription";
+import { MOCK_BRC20_INSCRIPTION, MOCK_INSCRIPTION } from "./mocks/inscription";
 import { MOCK_INSCRIPTION_TRANSFER } from "./mocks/tx";
 import { InscriptionSchema } from "../src/resources/inscription";
 
@@ -19,7 +19,7 @@ test("list all inscriptions (with params)", async () => {
   expect(InscriptionSchema.parse(inscriptions[0])).toBeTruthy();
 });
 
-test("succeed to get inscription by ID", async () => {
+test("get inscription by ID", async () => {
   const id =
     "26482871f33f1051f450f2da9af275794c0b5f1c61ebf35e4467fb42c2813403i0";
 
@@ -34,7 +34,7 @@ test("succeed to get inscription by ID", async () => {
   expect(InscriptionSchema.parse(inscription)).toBeTruthy();
 });
 
-test("succeed to get inscription by number", async () => {
+test("get inscription by number", async () => {
   const number = 1;
 
   mock(`/inscription/${number}`)?.reply(200, {
@@ -63,6 +63,21 @@ test("fail to get invalid inscription", async () => {
       id: invalidInscriptionId,
     }),
   ).rejects.toThrow("Inscription not found");
+});
+
+test("get BRC-20 inscription", async () => {
+  const id =
+    "b61b0172d95e266c18aea0c624db987e971a5d6d4ebc2aaed85da4642d635735i0";
+
+  mock(`/inscription/${id}`)?.reply(200, {
+    data: MOCK_BRC20_INSCRIPTION,
+  });
+
+  const inscription = await ordiscan.inscription.getById({
+    id,
+  });
+
+  expect(InscriptionSchema.parse(inscription)).toBeTruthy();
 });
 
 test("list inscription transfers", async () => {

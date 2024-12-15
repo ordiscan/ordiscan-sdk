@@ -1,16 +1,23 @@
 import { z } from "zod";
 import { BaseResource } from "./base";
 
-export const Brc20Schema = z
+export const Brc20ActionTypeSchema = z.enum(["TRANSFER", "MINT", "DEPLOY"]);
+
+export const Brc20ActionSchema = z.object({
+  tick: z.string(),
+  type: Brc20ActionTypeSchema,
+});
+
+export const Brc20TokenSchema = z
   .object({
     tick: z.string(),
     minted: z.number(),
     max_supply: z.number(),
-    price: z.number(),
+    price: z.number().nullable(),
   })
   .strict();
 
-export type Brc20 = z.infer<typeof Brc20Schema>;
+export type Brc20Token = z.infer<typeof Brc20TokenSchema>;
 
 export class Brc20Resource extends BaseResource {
   async list({
@@ -36,10 +43,10 @@ export class Brc20Resource extends BaseResource {
       url += `?${params.toString()}`;
     }
 
-    return this.client.fetch<Brc20[]>(url);
+    return this.client.fetch<Brc20Token[]>(url);
   }
 
   async getInfo({ name }: { name: string }) {
-    return this.client.fetch<Brc20>(`/brc20/${name}`);
+    return this.client.fetch<Brc20Token>(`/brc20/${name}`);
   }
 }

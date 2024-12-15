@@ -1,5 +1,5 @@
 import { expect, test } from "vitest";
-import { Brc20Schema } from "../src/resources/brc20";
+import { Brc20TokenSchema } from "../src/resources/brc20";
 
 import { MOCK_BRC20_INFO } from "./mocks/brc20";
 import { mock, ordiscan } from "./utils";
@@ -13,7 +13,7 @@ test("list brc20 tokens", async () => {
 
   const token = await ordiscan.brc20.list();
 
-  expect(Brc20Schema.parse(token[0])).toBeTruthy();
+  expect(Brc20TokenSchema.parse(token[0])).toBeTruthy();
 });
 
 test("list brc20 tokens (with params)", async () => {
@@ -36,5 +36,5 @@ test("get brc20 info", async () => {
 
   const token = await ordiscan.brc20.getInfo({ name: TOKEN_NAME });
 
-  expect(Brc20Schema.parse(token)).toBeTruthy();
+  expect(Brc20TokenSchema.parse(token)).toBeTruthy();
 });

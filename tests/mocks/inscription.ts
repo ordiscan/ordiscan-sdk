@@ -26,6 +26,9 @@ export const MOCK_INSCRIPTION: Inscription = {
   submodules: [
     "974c854784aa251c7e149cdb2188b74293d9c288bf89acc8acde348dcec320edi0",
   ],
+  collection_slug: null,
+  sats_name: null,
+  brc20_action: null,
 };
 
 export const MOCK_BRC20_INSCRIPTION: Inscription = {
@@ -51,6 +54,8 @@ export const MOCK_BRC20_INSCRIPTION: Inscription = {
   delegate_inscription_id: null,
   satributes: [],
   submodules: [],
+  collection_slug: null,
+  sats_name: null,
   brc20_action: {
     type: "DEPLOY",
     tick: "ORDI",

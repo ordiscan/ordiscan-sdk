@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 import { Ordiscan } from "../client";
+import { Brc20ActionTypeSchema } from "./brc20";
 import { Inscription } from "./inscription";
 
 export const RunestoneMessageSchema = z.object({
@@ -64,7 +65,7 @@ export type InscriptionActivity = z.infer<typeof InscriptionActivitySchema>;
 
 export const Brc20ActivitySchema = z.object({
   ticker: z.string(),
-  type: z.enum(["TRANSFER", "MINT", "DEPLOY"]),
+  type: Brc20ActionTypeSchema,
   from_address: z.string().nullable(),
   to_address: z.string().nullable(),
   amount: z.number(),

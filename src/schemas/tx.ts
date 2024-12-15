@@ -1,7 +1,5 @@
 import { z } from "zod";
 
-import { Brc20ActionTypeSchema } from "./brc20";
-
 export const TxInfoSchema = z.object({
   txid: z.string(),
   fee: z.number(),

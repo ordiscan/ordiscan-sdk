@@ -6,8 +6,8 @@ import {
 } from "./types";
 
 import { InscriptionResource } from "./resources/inscription";
-import { Address } from "./resources/address";
-import { Tx } from "./resources/tx";
+import { AddressResource } from "./resources/address";
+import { TxResource } from "./resources/tx";
 import { RuneResource } from "./resources/rune";
 import { Brc20Resource } from "./resources/brc20";
 import { SatResource } from "./resources/sat";
@@ -21,9 +21,8 @@ export class Ordiscan {
   private readonly auth: string;
   private readonly version: ApiVersion;
 
-  public readonly address: (address: string) => Address;
-  public readonly tx: (txid: string) => Tx;
-
+  public readonly address: AddressResource;
+  public readonly tx: TxResource;
   public readonly inscription: InscriptionResource;
   public readonly rune: RuneResource;
   public readonly sat: SatResource;
@@ -37,9 +36,8 @@ export class Ordiscan {
     this.version = config.version || "v1";
 
     // Initialize resources
-    this.address = (address: string) => new Address(this, address);
-    this.tx = (txid: string) => new Tx(this, txid);
-
+    this.address = new AddressResource(this);
+    this.tx = new TxResource(this);
     this.inscription = new InscriptionResource(this);
     this.rune = new RuneResource(this);
     this.sat = new SatResource(this);

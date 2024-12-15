@@ -28,16 +28,14 @@ test("list all inscriptions (with params)", async () => {
 });
 
 test("get inscription by ID", async () => {
-  const id =
+  const inscriptionId =
     "26482871f33f1051f450f2da9af275794c0b5f1c61ebf35e4467fb42c2813403i0";
 
-  mock(`/inscription/${id}`)?.reply(200, {
+  mock(`/inscription/${inscriptionId}`)?.reply(200, {
     data: MOCK_INSCRIPTION,
   });
 
-  const inscription = await ordiscan.inscription.getById({
-    id,
-  });
+  const inscription = await ordiscan.inscription.getInfo(inscriptionId);
 
   expect(InscriptionSchema.parse(inscription)).toBeTruthy();
 });
@@ -49,9 +47,7 @@ test("get inscription by number", async () => {
     data: MOCK_INSCRIPTION,
   });
 
-  const inscription = await ordiscan.inscription.getByNumber({
-    number,
-  });
+  const inscription = await ordiscan.inscription.getInfo(number);
 
   expect(InscriptionSchema.parse(inscription)).toBeTruthy();
 });
@@ -67,9 +63,7 @@ test("fail to get invalid inscription", async () => {
   });
 
   await expect(
-    ordiscan.inscription.getById({
-      id: invalidInscriptionId,
-    }),
+    ordiscan.inscription.getInfo(invalidInscriptionId),
   ).rejects.toThrow("Inscription not found");
 });
 
@@ -81,9 +75,7 @@ test("get BRC-20 inscription", async () => {
     data: MOCK_BRC20_INSCRIPTION,
   });
 
-  const inscription = await ordiscan.inscription.getById({
-    id,
-  });
+  const inscription = await ordiscan.inscription.getInfo(id);
 
   expect(InscriptionSchema.parse(inscription)).toBeTruthy();
 });

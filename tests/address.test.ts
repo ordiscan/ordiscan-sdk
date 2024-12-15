@@ -31,7 +31,9 @@ test("list all UTXOs from address", async () => {
     data: [MOCK_UTXO],
   });
 
-  const utxos = await ordiscan.address(ADDRESS).utxos();
+  const utxos = await ordiscan.address.getUtxos({
+    address: ADDRESS,
+  });
 
   expect(utxos.length).toBeGreaterThan(0);
   expect(UtxoSchema.parse(utxos[0])).toBeTruthy();
@@ -44,7 +46,9 @@ test("list all inscriptions from address", async () => {
     data: [MOCK_INSCRIPTION],
   });
 
-  const inscriptions = await ordiscan.address(ADDRESS).inscriptions();
+  const inscriptions = await ordiscan.address.getInscriptions({
+    address: ADDRESS,
+  });
 
   expect(inscriptions.length).toBeGreaterThan(0);
   expect(InscriptionSchema.parse(inscriptions[0])).toBeTruthy();
@@ -57,7 +61,8 @@ test("list all inscriptions from address (page 2)", async () => {
     data: [],
   });
 
-  const inscriptions = await ordiscan.address(ADDRESS).inscriptions({
+  const inscriptions = await ordiscan.address.getInscriptions({
+    address: ADDRESS,
     page: 2,
   });
 
@@ -72,7 +77,9 @@ test("list all rune balances from address", async () => {
     data: [MOCK_RUNE_BALANCE],
   });
 
-  const runeBalances = await ordiscan.address(ADDRESS).runes();
+  const runeBalances = await ordiscan.address.getRunes({
+    address: ADDRESS,
+  });
 
   expect(runeBalances.length).toBeGreaterThan(0);
   expect(RuneBalanceSchema.parse(runeBalances[0])).toBeTruthy();
@@ -86,7 +93,9 @@ test("list all BRC-20 balances from address", async () => {
     data: [MOCK_BRC20_BALANCE],
   });
 
-  const brc20Balances = await ordiscan.address(ADDRESS).brc20();
+  const brc20Balances = await ordiscan.address.getBrc20Tokens({
+    address: ADDRESS,
+  });
 
   expect(brc20Balances.length).toBeGreaterThan(0);
   expect(Brc20BalanceSchema.parse(brc20Balances[0])).toBeTruthy();
@@ -100,31 +109,36 @@ test("list all rare sats from address", async () => {
     data: [MOCK_RARE_SAT_BALANCE],
   });
 
-  const rareSatBalances = await ordiscan.address(ADDRESS).rareSats();
+  const rareSatBalances = await ordiscan.address.getRareSats({
+    address: ADDRESS,
+  });
 
   expect(SatributeBalanceSchema.parse(rareSatBalances[0])).toBeTruthy();
 });
 
-test("list all inscriptions activity for address", async () => {
+test("list all inscription activity for address", async () => {
   const ADDRESS = "bc1qyv5eh8hpmyna7hvhphy6ca4u7j3627k6jzehms";
 
   mock(`/address/${ADDRESS}/activity`)?.reply(200, {
     data: [MOCK_INSCRIPTION_ACTIVITY],
   });
 
-  const activity = await ordiscan.address(ADDRESS).inscriptionActivity();
+  const activity = await ordiscan.address.getInscriptionActivity({
+    address: ADDRESS,
+  });
 
   expect(InscriptionActivitySchema.parse(activity[0])).toBeTruthy();
 });
 
-test("list all inscriptions activity for address (with params)", async () => {
+test("list all inscription activity for address (with params)", async () => {
   const ADDRESS = "bc1qyv5eh8hpmyna7hvhphy6ca4u7j3627k6jzehms";
 
   mock(`/address/${ADDRESS}/activity?type=inscribe&page=2`)?.reply(200, {
     data: [],
   });
 
-  const activity = await ordiscan.address(ADDRESS).inscriptionActivity({
+  const activity = await ordiscan.address.getInscriptionActivity({
+    address: ADDRESS,
     type: "inscribe",
     page: 2,
   });
@@ -139,7 +153,9 @@ test("list all runes activity for address", async () => {
     data: [MOCK_RUNIC_TX],
   });
 
-  const activity = await ordiscan.address(ADDRESS).runesActivity();
+  const activity = await ordiscan.address.getRunesActivity({
+    address: ADDRESS,
+  });
 
   expect(activity.length).toBeGreaterThan(0);
   expect(RunicTxSchema.parse(activity[0])).toBeTruthy();
@@ -152,7 +168,8 @@ test("list all runes activity for address (with params)", async () => {
     data: [],
   });
 
-  const activity = await ordiscan.address(ADDRESS).runesActivity({
+  const activity = await ordiscan.address.getRunesActivity({
+    address: ADDRESS,
     sort: "oldest",
     page: 2,
   });
@@ -168,7 +185,9 @@ test("list all BRC-20 activity for address", async () => {
     data: [MOCK_BRC20_ACTIVITY],
   });
 
-  const activity = await ordiscan.address(ADDRESS).brc20Activity();
+  const activity = await ordiscan.address.getBrc20Activity({
+    address: ADDRESS,
+  });
 
   expect(activity.length).toBeGreaterThan(0);
   expect(Brc20ActivitySchema.parse(activity[0])).toBeTruthy();
@@ -182,7 +201,8 @@ test("list all BRC-20 activity for address (with params)", async () => {
     data: [],
   });
 
-  const activity = await ordiscan.address(ADDRESS).brc20Activity({
+  const activity = await ordiscan.address.getBrc20Activity({
+    address: ADDRESS,
     sort: "oldest",
     page: 2,
   });

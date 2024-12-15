@@ -38,7 +38,7 @@ test("get inscriptions IDs in collection", async () => {
     ],
   });
 
-  const inscriptionIds = await ordiscan.collection.getInscriptionIds({
+  const inscriptionIds = await ordiscan.collection.getInscriptions({
     slug: "taproot-wizards",
   });
 

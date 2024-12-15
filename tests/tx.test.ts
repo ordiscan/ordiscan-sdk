@@ -13,7 +13,7 @@ test("get tx info", async () => {
     data: MOCK_TX_INFO,
   });
 
-  const txInfo = await ordiscan.tx(TXID).info();
+  const txInfo = await ordiscan.tx.getInfo(TXID);
 
   expect(txInfo.size).toBeTypeOf("number");
   expect(txInfo.fee).toBeTypeOf("number");
@@ -27,7 +27,9 @@ test("get inscriptions from tx", async () => {
     data: [MOCK_INSCRIPTION],
   });
 
-  const inscriptions = await ordiscan.tx(TXID).inscriptions();
+  const inscriptions = await ordiscan.tx.getInscriptions({
+    txid: TXID,
+  });
 
   expect(inscriptions.length).toBe(1);
   expect(inscriptions[0].inscription_number).toBeTypeOf("number");
@@ -41,7 +43,9 @@ test("get runes from tx", async () => {
     data: MOCK_RUNIC_TX,
   });
 
-  const runicTx = await ordiscan.tx(TXID).runes();
+  const runicTx = await ordiscan.tx.getRunes({
+    txid: TXID,
+  });
 
   expect(runicTx.runestone_messages[0].rune).toBeTypeOf("string");
 });
@@ -54,7 +58,9 @@ test("get transferred inscriptions from tx", async () => {
     data: [MOCK_INSCRIPTION_TRANSFER],
   });
 
-  const inscriptionTransfers = await ordiscan.tx(TXID).inscriptionTransfers();
+  const inscriptionTransfers = await ordiscan.tx.getInscriptionTransfers({
+    txid: TXID,
+  });
 
   expect(inscriptionTransfers.length).toBe(1);
   expect(inscriptionTransfers[0].inscription_id).toBeTypeOf("string");

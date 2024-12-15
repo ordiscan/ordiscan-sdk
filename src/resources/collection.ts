@@ -38,7 +38,7 @@ export class CollectionResource extends BaseResource {
     return this.client.fetch<Collection>(`/collection/${slug}`);
   }
 
-  async getInscriptionIds({ slug }: { slug: string }) {
+  async getInscriptions({ slug }: { slug: string }) {
     return this.client.fetch<string[]>(`/collection/${slug}/inscriptions`);
   }
 }

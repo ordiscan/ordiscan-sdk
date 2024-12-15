@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { Ordiscan } from "../client";
+import { BaseResource } from "./base";
 import { Inscription } from "./inscription";
 import { SatributeSchema } from "./sat";
 import { Brc20Activity, InscriptionActivity, RunicTx } from "./tx";
@@ -35,18 +35,13 @@ export const UtxoSchema = z.object({
 
 export type Utxo = z.infer<typeof UtxoSchema>;
 
-export class Address {
-  constructor(
-    private readonly client: Ordiscan,
-    private readonly address: string,
-  ) {}
-
-  async utxos() {
-    return this.client.fetch<Utxo[]>(`/address/${this.address}/utxos`);
+export class AddressResource extends BaseResource {
+  async getUtxos({ address }: { address: string }) {
+    return this.client.fetch<Utxo[]>(`/address/${address}/utxos`);
   }
 
-  async inscriptions({ page }: { page?: number } = {}) {
-    let url = `/address/${this.address}/inscriptions`;
+  async getInscriptions({ address, page }: { address: string; page?: number }) {
+    let url = `/address/${address}/inscriptions`;
 
     if (page) {
       url += `?page=${page}`;
@@ -55,25 +50,30 @@ export class Address {
     return this.client.fetch<Inscription[]>(url);
   }
 
-  async runes() {
-    return this.client.fetch<RuneBalance[]>(`/address/${this.address}/runes`);
+  async getRunes({ address }: { address: string }) {
+    return this.client.fetch<RuneBalance[]>(`/address/${address}/runes`);
   }
 
-  async brc20() {
-    return this.client.fetch<Brc20Balance[]>(`/address/${this.address}/brc20`);
+  async getBrc20Tokens({ address }: { address: string }) {
+    return this.client.fetch<Brc20Balance[]>(`/address/${address}/brc20`);
   }
 
-  async rareSats() {
+  async getRareSats({ address }: { address: string }) {
     return this.client.fetch<SatributeBalance[]>(
-      `/address/${this.address}/rare-sats`,
+      `/address/${address}/rare-sats`,
     );
   }
 
-  async inscriptionActivity({
+  async getInscriptionActivity({
+    address,
     type,
     page,
-  }: { type?: "transfer" | "inscribe"; page?: number } = {}) {
-    let url = `/address/${this.address}/activity`;
+  }: {
+    address: string;
+    type?: "transfer" | "inscribe";
+    page?: number;
+  }) {
+    let url = `/address/${address}/activity`;
 
     const params = new URLSearchParams();
 
@@ -92,14 +92,16 @@ export class Address {
     return this.client.fetch<InscriptionActivity[]>(url);
   }
 
-  async runesActivity({
+  async getRunesActivity({
+    address,
     page,
     sort,
   }: {
+    address: string;
     page?: number;
     sort?: "oldest" | "newest";
-  } = {}) {
-    let url = `/address/${this.address}/activity/runes`;
+  }) {
+    let url = `/address/${address}/activity/runes`;
 
     const params = new URLSearchParams();
 
@@ -118,14 +120,16 @@ export class Address {
     return this.client.fetch<RunicTx[]>(url);
   }
 
-  async brc20Activity({
+  async getBrc20Activity({
+    address,
     page,
     sort,
   }: {
+    address: string;
     page?: number;
     sort?: "oldest" | "newest";
-  } = {}) {
-    let url = `/address/${this.address}/activity/brc20`;
+  }) {
+    let url = `/address/${address}/activity/brc20`;
 
     const params = new URLSearchParams();
 

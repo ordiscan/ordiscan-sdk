@@ -18,14 +18,11 @@ const ordiscan = new Ordiscan({
 });
 
 // Get a specific inscription
-const inscription = await ordiscan.inscriptions.get({
-  inscriptionId: 'b61b0172d95e266c18aea0c624db987e971a5d6d4ebc2aaed85da4642d635735i0'
-});
+const inscription = await ordiscan.inscription.getInfo('b61b0172d95e266c18aea0c624db987e971a5d6d4ebc2aaed85da4642d635735i0');
 
 // List inscriptions with pagination
-const inscriptions = await ordiscan.inscriptions.list({
-  after: 'last-inscription-id',
-  limit: 20
+const inscriptions = await ordiscan.inscription.list({
+  sort: "inscription_number_asc",
 });
 ```
 
@@ -35,9 +32,7 @@ The client throws `OrdiscanError` for API errors:
 
 ```typescript
 try {
-  const inscription = await ordiscan.inscriptions.get({
-    inscriptionId: 'invalid-id'
-  });
+  const inscription = await ordiscan.inscription.getInfo('invalid-id');
 } catch (error) {
   if (error instanceof OrdiscanError) {
     console.error(`API Error: ${error.message}`);

@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { Ordiscan } from "../client";
+import { BaseResource } from "./base";
 import { Brc20ActionTypeSchema } from "./brc20";
 import { Inscription } from "./inscription";
 
@@ -90,27 +90,22 @@ export const TxInfoSchema = z.object({
 
 export type TxInfo = z.infer<typeof TxInfoSchema>;
 
-export class Tx {
-  constructor(
-    private readonly client: Ordiscan,
-    private readonly txid: string,
-  ) {}
-
-  async info() {
-    return this.client.fetch<TxInfo>(`/tx/${this.txid}`);
+export class TxResource extends BaseResource {
+  async getInfo(txid: string) {
+    return this.client.fetch<TxInfo>(`/tx/${txid}`);
   }
 
-  async inscriptions() {
-    return this.client.fetch<Inscription[]>(`/tx/${this.txid}/inscriptions`);
+  async getInscriptions({ txid }: { txid: string }) {
+    return this.client.fetch<Inscription[]>(`/tx/${txid}/inscriptions`);
   }
 
-  async inscriptionTransfers() {
+  async getInscriptionTransfers({ txid }: { txid: string }) {
     return this.client.fetch<InscriptionTransfer[]>(
-      `/tx/${this.txid}/inscription-transfers`,
+      `/tx/${txid}/inscription-transfers`,
     );
   }
 
-  async runes() {
-    return this.client.fetch<RunicTx>(`/tx/${this.txid}/runes`);
+  async getRunes({ txid }: { txid: string }) {
+    return this.client.fetch<RunicTx>(`/tx/${txid}/runes`);
   }
 }

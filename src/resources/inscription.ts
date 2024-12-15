@@ -43,12 +43,8 @@ export const InscriptionSchema = z
 export type Inscription = z.infer<typeof InscriptionSchema>;
 
 export class InscriptionResource extends BaseResource {
-  async getById({ id }: { id: string }): Promise<Inscription> {
-    return this.client.fetch<Inscription>(`/inscription/${id}`);
-  }
-
-  async getByNumber({ number }: { number: number }): Promise<Inscription> {
-    return this.client.fetch<Inscription>(`/inscription/${number}`);
+  async getInfo(identifier: string | number): Promise<Inscription> {
+    return this.client.fetch<Inscription>(`/inscription/${identifier}`);
   }
 
   async list({
@@ -85,12 +81,24 @@ export class InscriptionResource extends BaseResource {
 
   async getTransfers({
     inscriptionId,
+    page,
   }: {
     inscriptionId: string;
+    page?: number;
   }): Promise<InscriptionTransfer[]> {
-    return this.client.fetch<InscriptionTransfer[]>(
-      `/inscription/${inscriptionId}/activity`,
-    );
+    let url = `/inscription/${inscriptionId}/activity`;
+
+    const params = new URLSearchParams();
+
+    if (page !== undefined) {
+      params.append("page", page.toString());
+    }
+
+    if (params.size) {
+      url += `?${params.toString()}`;
+    }
+
+    return this.client.fetch<InscriptionTransfer[]>(url);
   }
 
   async getTraits({

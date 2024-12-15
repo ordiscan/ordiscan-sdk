@@ -1,4 +1,4 @@
-import { Inscription } from "../../src/resources/inscriptions";
+import { Inscription } from "../../src/resources/inscription";
 import { InscriptionActivity } from "../../src/resources/tx";
 
 export const MOCK_INSCRIPTION: Inscription = {
@@ -26,6 +26,35 @@ export const MOCK_INSCRIPTION: Inscription = {
   submodules: [
     "974c854784aa251c7e149cdb2188b74293d9c288bf89acc8acde348dcec320edi0",
   ],
+};
+
+export const MOCK_BRC20_INSCRIPTION: Inscription = {
+  inscription_id:
+    "b61b0172d95e266c18aea0c624db987e971a5d6d4ebc2aaed85da4642d635735i0",
+  inscription_number: 348020,
+  content_type: "text/plain;charset=utf-8",
+  owner_address:
+    "bc1pxaneaf3w4d27hl2y93fuft2xk6m4u3wc4rafevc6slgd7f5tq2dqyfgy06",
+  owner_output:
+    "b61b0172d95e266c18aea0c624db987e971a5d6d4ebc2aaed85da4642d635735:0",
+  genesis_address:
+    "bc1pxaneaf3w4d27hl2y93fuft2xk6m4u3wc4rafevc6slgd7f5tq2dqyfgy06",
+  genesis_output:
+    "b61b0172d95e266c18aea0c624db987e971a5d6d4ebc2aaed85da4642d635735:0",
+  timestamp: "2023-03-08T04:16:31.000Z",
+  metadata: null,
+  metaprotocol: null,
+  sat: 923155354107609,
+  content_url:
+    "https://ordiscan.com/content/b61b0172d95e266c18aea0c624db987e971a5d6d4ebc2aaed85da4642d635735i0",
+  parent_inscription_id: null,
+  delegate_inscription_id: null,
+  satributes: [],
+  submodules: [],
+  brc20_action: {
+    type: "DEPLOY",
+    tick: "ORDI",
+  },
 };
 
 export const MOCK_INSCRIPTION_ACTIVITY: InscriptionActivity = {

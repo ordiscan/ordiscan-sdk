@@ -21,6 +21,14 @@
     "ordiscan",
     "api"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ordiscan/ordiscan-sdk"
+  },
+  "bugs": {
+    "url": "https://github.com/ordiscan/ordiscan-sdk/issues"
+  },
+  "homepage": "https://ordiscan.com/docs/api",
   "author": "t4t5",
   "license": "MIT",
   "devDependencies": {

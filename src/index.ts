@@ -6,7 +6,7 @@ export default Ordiscan;
 
 export { OrdiscanError } from "@/types";
 
-export type { OrdiscanConfig } from "@/types";
+export type { OrdiscanConfig, ApiVersion } from "@/types";
 
 export type { Brc20Token, Brc20Balance, Brc20Activity } from "@/schemas/brc20";
 export type { Collection } from "@/schemas/collection";

@@ -2,6 +2,8 @@
 
 A JavaScript/TypeScript SDK for the [Ordiscan API](https://ordiscan.com/docs/api).
 
+[![npm version](https://img.shields.io/npm/v/ordiscan.svg?style=flat-square)](https://www.npmjs.com/package/ordiscan)
+
 ## Installation
 
 ```bash

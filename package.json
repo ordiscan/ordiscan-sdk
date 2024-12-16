@@ -9,7 +9,7 @@
     "README.md"
   ],
   "scripts": {
-    "build": "tsc",
+    "build": "tsc -p tsconfig.build.json",
     "test": "vitest",
     "prepublishOnly": "npm run build",
     "prepare": "husky"

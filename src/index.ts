@@ -1,4 +1,8 @@
+import { Ordiscan } from "@/client";
+
 export { Ordiscan } from "@/client";
+
+export default Ordiscan;
 
 export { OrdiscanError } from "@/types";
 

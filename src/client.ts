@@ -14,7 +14,7 @@ import {
   OrdiscanError,
 } from "@/types";
 
-const DEFAULT_BASE_URL = "https://api.ordiscan.com/v1";
+const DEFAULT_BASE_URL = "https://api.ordiscan.com";
 
 export class Ordiscan {
   private readonly baseUrl: string;

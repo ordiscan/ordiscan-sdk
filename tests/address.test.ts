@@ -35,6 +35,21 @@ test("list all UTXOs from address", async () => {
   expect(UtxoSchema.parse(utxos[0])).toBeTruthy();
 });
 
+test("list all inscription IDs from address", async () => {
+  const ADDRESS = "bc1qctx9fzhzf4253ka7jd2s0sf5fqvzffnfvpk5wn";
+
+  mock(`/address/${ADDRESS}/inscription-ids`)?.reply(200, {
+    data: [MOCK_INSCRIPTION.inscription_id],
+  });
+
+  const inscriptionIds = await ordiscan.address.getInscriptionIds({
+    address: ADDRESS,
+  });
+
+  expect(inscriptionIds.length).toBeGreaterThan(0);
+  expect(inscriptionIds[0]).toBeTypeOf("string");
+});
+
 test("list all inscriptions from address", async () => {
   const ADDRESS = "bc1qctx9fzhzf4253ka7jd2s0sf5fqvzffnfvpk5wn";
 

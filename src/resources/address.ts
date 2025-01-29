@@ -13,6 +13,12 @@ export class AddressResource extends BaseResource {
     return this.client.fetch<Utxo[]>(`/address/${address}/utxos`);
   }
 
+  async getInscriptionIds({ address }: { address: string }) {
+    let url = `/address/${address}/inscription-ids`;
+
+    return this.client.fetch<string[]>(url);
+  }
+
   async getInscriptions({ address, page }: { address: string; page?: number }) {
     let url = `/address/${address}/inscriptions`;
 

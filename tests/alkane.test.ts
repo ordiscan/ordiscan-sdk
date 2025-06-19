@@ -3,11 +3,13 @@ import { expect, test } from "vitest";
 import {
   AlkaneBaseSchema,
   AlkaneWithSupplySchema,
+  AlkaneMetaSchema,
 } from "@/schemas/alkane";
 
 import {
   MOCK_ALKANE_INFO,
   MOCK_ALKANE_WITH_SUPPLY,
+  MOCK_ALKANE_META,
 } from "tests/mocks/alkane";
 
 import { mock, ordiscan } from "tests/utils";
@@ -48,4 +50,14 @@ test("get alkane info", async () => {
   const alkane = await ordiscan.alkane.getInfo({ id: ALKANE_ID });
 
   expect(AlkaneWithSupplySchema.parse(alkane)).toBeTruthy();
+});
+
+test("get alkane meta", async () => {
+  mock(`/alkane/${ALKANE_ID}/meta`)?.reply(200, {
+    data: MOCK_ALKANE_META,
+  });
+
+  const meta = await ordiscan.alkane.getMeta({ id: ALKANE_ID });
+
+  expect(AlkaneMetaSchema.parse(meta)).toBeTruthy();
 });

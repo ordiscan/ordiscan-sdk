@@ -5,14 +5,12 @@ export const MOCK_ALKANE_INFO: Alkane = {
   name: "METHANE",
   symbol: "CH4",
   type: "TOKEN",
+  logo_url: null,
   premined_supply: "0",
   amount_per_mint: "1000000000000",
   mint_count_cap: "81577",
   deploy_txid: "a56a9492a24f85a1deef3eb628d6e1d3a827fc6f75e315bfb88ee0c6540c1b78",
   deploy_timestamp: null,
-  deploy_block_height: null,
-  deploy_block_hash: null,
-  resource_number: 797,
 };
 
 export const MOCK_ALKANE_WITH_SUPPLY: AlkaneWithSupply = {

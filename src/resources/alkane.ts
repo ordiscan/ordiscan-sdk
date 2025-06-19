@@ -1,18 +1,16 @@
 import { BaseResource } from "@/resources/base";
 
-import { Alkane, AlkaneWithSupply } from "@/schemas/alkane";
+import { Alkane, AlkaneWithSupply, AlkaneMeta } from "@/schemas/alkane";
 
 export class AlkaneResource extends BaseResource {
   async list({
     sort,
     type,
-    after,
-    before,
+    page,
   }: {
     sort?: "newest" | "oldest";
     type?: "TOKEN" | "CONTRACT" | "NFT_COLLECTION" | "NFT_ITEM";
-    after?: string;
-    before?: string;
+    page?: number;
   } = {}): Promise<Alkane[]> {
     const params = new URLSearchParams();
 
@@ -26,12 +24,8 @@ export class AlkaneResource extends BaseResource {
       params.append("type", type);
     }
 
-    if (before !== undefined) {
-      params.append("before", before);
-    }
-
-    if (after !== undefined) {
-      params.append("after", after);
+    if (page) {
+      params.append("page", page.toString());
     }
 
     if (params.size) {
@@ -43,5 +37,9 @@ export class AlkaneResource extends BaseResource {
 
   async getInfo({ id }: { id: string }) {
     return this.client.fetch<AlkaneWithSupply>(`/alkane/${id}`);
+  }
+
+  async getMeta({ id }: { id: string }) {
+    return this.client.fetch<AlkaneMeta>(`/alkane/${id}/meta`);
   }
 }

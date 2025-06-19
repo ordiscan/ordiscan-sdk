@@ -26,14 +26,14 @@ test("list alkanes", async () => {
 });
 
 test("list alkanes (with params)", async () => {
-  mock(`/alkanes?sort=newest&type=TOKEN&after=2%3A40`)?.reply(200, {
+  mock(`/alkanes?sort=newest&type=TOKEN&page=2`)?.reply(200, {
     data: [MOCK_ALKANE_INFO],
   });
 
   const alkanes = await ordiscan.alkane.list({
     sort: "newest",
     type: "TOKEN",
-    after: "2:40",
+    page: 2,
   });
 
   expect(alkanes.length).toBeGreaterThan(0);

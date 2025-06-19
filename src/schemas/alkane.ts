@@ -93,51 +93,96 @@ export const ProtostoneMessageSchema = z
 
 export type ProtostoneMessage = z.infer<typeof ProtostoneMessageSchema>;
 
+// Alkane token ID
+export const AlkaneTokenIdSchema = z
+  .object({
+    block: z.string(),
+    tx: z.string(),
+  })
+  .strict();
+
+export type AlkaneTokenId = z.infer<typeof AlkaneTokenIdSchema>;
+
+// Incoming alkane
+export const IncomingAlkaneSchema = z
+  .object({
+    id: AlkaneTokenIdSchema,
+    value: z.string(),
+  })
+  .strict();
+
+export type IncomingAlkane = z.infer<typeof IncomingAlkaneSchema>;
+
 // Alkane trace context
 export const AlkaneTraceContextSchema = z
   .object({
-    myself: z.object({
-      block: z.string(),
-      tx: z.string(),
-    }),
-    caller: z.object({
-      block: z.string(),
-      tx: z.string(),
-    }),
+    myself: AlkaneTokenIdSchema,
+    caller: AlkaneTokenIdSchema,
     inputs: z.array(z.string()),
-    incomingAlkanes: z.array(z.unknown()),
+    incomingAlkanes: z.array(IncomingAlkaneSchema),
     vout: z.number(),
   })
   .strict();
 
 export type AlkaneTraceContext = z.infer<typeof AlkaneTraceContextSchema>;
 
-// Alkane trace event data
-export const AlkaneTraceEventDataSchema = z.union([
-  z.object({
-    type: z.literal("call"),
-    context: AlkaneTraceContextSchema,
-    fuel: z.number(),
-  }),
-  z.object({
-    status: z.string(),
-    response: z.object({
-      alkanes: z.array(z.unknown()),
-      data: z.string(),
-      storage: z.array(z.unknown()),
-    }),
-  }),
-]);
-
-export type AlkaneTraceEventData = z.infer<typeof AlkaneTraceEventDataSchema>;
-
-// Alkane trace event
-export const AlkaneTraceEventSchema = z
+// Storage entry
+export const StorageEntrySchema = z
   .object({
-    event: z.enum(["invoke", "return", "create"]),
-    data: AlkaneTraceEventDataSchema,
+    key: z.string(),
+    value: z.string(),
   })
   .strict();
+
+export type StorageEntry = z.infer<typeof StorageEntrySchema>;
+
+// Alkane create event
+export const AlkaneCreateEventSchema = z
+  .object({
+    event: z.literal("create"),
+    data: AlkaneTokenIdSchema,
+  })
+  .strict();
+
+export type AlkaneCreateEvent = z.infer<typeof AlkaneCreateEventSchema>;
+
+// Alkane invoke event
+export const AlkaneInvokeEventSchema = z
+  .object({
+    event: z.literal("invoke"),
+    data: z.object({
+      type: z.literal("call"),
+      context: AlkaneTraceContextSchema,
+      fuel: z.number(),
+    }),
+  })
+  .strict();
+
+export type AlkaneInvokeEvent = z.infer<typeof AlkaneInvokeEventSchema>;
+
+// Alkane return event
+export const AlkaneReturnEventSchema = z
+  .object({
+    event: z.literal("return"),
+    data: z.object({
+      status: z.enum(["success", "revert"]),
+      response: z.object({
+        alkanes: z.array(IncomingAlkaneSchema),
+        data: z.string(),
+        storage: z.array(StorageEntrySchema),
+      }),
+    }),
+  })
+  .strict();
+
+export type AlkaneReturnEvent = z.infer<typeof AlkaneReturnEventSchema>;
+
+// Alkane trace event (union of all event types)
+export const AlkaneTraceEventSchema = z.union([
+  AlkaneCreateEventSchema,
+  AlkaneInvokeEventSchema,
+  AlkaneReturnEventSchema,
+]);
 
 export type AlkaneTraceEvent = z.infer<typeof AlkaneTraceEventSchema>;
 

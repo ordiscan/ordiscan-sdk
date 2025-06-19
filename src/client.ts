@@ -1,5 +1,6 @@
 import { AddressResource } from "@/resources/address";
 import { AlkaneResource } from "@/resources/alkane";
+import { BlockResource } from "@/resources/block";
 import { Brc20Resource } from "@/resources/brc20";
 import { CollectionResource } from "@/resources/collection";
 import { InscriptionResource } from "@/resources/inscription";
@@ -24,6 +25,7 @@ export class Ordiscan {
 
   public readonly address: AddressResource;
   public readonly alkane: AlkaneResource;
+  public readonly block: BlockResource;
   public readonly tx: TxResource;
   public readonly inscription: InscriptionResource;
   public readonly rune: RuneResource;
@@ -40,6 +42,7 @@ export class Ordiscan {
     // Initialize resources
     this.address = new AddressResource(this);
     this.alkane = new AlkaneResource(this);
+    this.block = new BlockResource(this);
     this.tx = new TxResource(this);
     this.inscription = new InscriptionResource(this);
     this.rune = new RuneResource(this);

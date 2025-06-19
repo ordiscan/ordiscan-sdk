@@ -1,5 +1,6 @@
 import { BaseResource } from "@/resources/base";
 
+import { AlkaneTxInfo } from "@/schemas/alkane";
 import { Inscription } from "@/schemas/inscription";
 import { InscriptionTransfer } from "@/schemas/inscriptionTx";
 import { RunicTx } from "@/schemas/runicTx";
@@ -22,5 +23,9 @@ export class TxResource extends BaseResource {
 
   async getRunes({ txid }: { txid: string }) {
     return this.client.fetch<RunicTx>(`/tx/${txid}/runes`);
+  }
+
+  async getAlkanes({ txid }: { txid: string }) {
+    return this.client.fetch<AlkaneTxInfo>(`/tx/${txid}/alkanes`);
   }
 }

@@ -1,5 +1,6 @@
 import { BaseResource } from "@/resources/base";
 
+import { AlkaneBalance, AlkaneUtxo } from "@/schemas/alkane";
 import { Brc20Activity, Brc20Balance } from "@/schemas/brc20";
 import { Inscription } from "@/schemas/inscription";
 import { InscriptionActivity } from "@/schemas/inscriptionTx";
@@ -123,5 +124,13 @@ export class AddressResource extends BaseResource {
     }
 
     return this.client.fetch<Brc20Activity[]>(url);
+  }
+
+  async getAlkanes({ address }: { address: string }) {
+    return this.client.fetch<AlkaneBalance[]>(`/address/${address}/alkanes`);
+  }
+
+  async getAlkaneUtxos({ address }: { address: string }) {
+    return this.client.fetch<AlkaneUtxo[]>(`/address/${address}/utxos/alkanes`);
   }
 }

@@ -8,6 +8,7 @@ export { OrdiscanError } from "@/types";
 
 export type { OrdiscanConfig, ApiVersion } from "@/types";
 
+export type { Alkane, AlkaneWithSupply } from "@/schemas/alkane";
 export type { Brc20Token, Brc20Balance, Brc20Activity } from "@/schemas/brc20";
 export type { Collection } from "@/schemas/collection";
 export type { Inscription } from "@/schemas/inscription";

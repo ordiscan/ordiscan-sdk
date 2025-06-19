@@ -1,5 +1,7 @@
 import { expect, test } from "vitest";
 
+import { AlkaneTxInfoSchema } from "@/schemas/alkane";
+import { MOCK_ALKANE_TX_INFO } from "tests/mocks/alkane";
 import { MOCK_INSCRIPTION } from "tests/mocks/inscription";
 import { MOCK_RUNIC_TX } from "tests/mocks/rune";
 import { MOCK_INSCRIPTION_TRANSFER, MOCK_TX_INFO } from "tests/mocks/tx";
@@ -64,4 +66,21 @@ test("get transferred inscriptions from tx", async () => {
 
   expect(inscriptionTransfers.length).toBe(1);
   expect(inscriptionTransfers[0].inscription_id).toBeTypeOf("string");
+});
+
+test("get alkanes from tx", async () => {
+  const TXID =
+    "7d0a2dd897222913d58fc957b0429526117a0a61c964642fe93b077f328ccec1";
+
+  mock(`/tx/${TXID}/alkanes`)?.reply(200, {
+    data: MOCK_ALKANE_TX_INFO,
+  });
+
+  const alkaneTxInfo = await ordiscan.tx.getAlkanes({
+    txid: TXID,
+  });
+
+  expect(AlkaneTxInfoSchema.parse(alkaneTxInfo)).toBeTruthy();
+  expect(alkaneTxInfo.txid).toBe(TXID);
+  expect(alkaneTxInfo.protostones.length).toBeGreaterThan(0);
 });

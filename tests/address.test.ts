@@ -1,5 +1,6 @@
 import { expect, test } from "vitest";
 
+import { AlkaneBalanceSchema, AlkaneUtxoSchema } from "@/schemas/alkane";
 import { Brc20ActivitySchema, Brc20BalanceSchema } from "@/schemas/brc20";
 import { InscriptionSchema } from "@/schemas/inscription";
 import { InscriptionActivitySchema } from "@/schemas/inscriptionTx";
@@ -8,6 +9,7 @@ import { RunicTxSchema } from "@/schemas/runicTx";
 import { RareSatBalanceSchema } from "@/schemas/sat";
 import { UtxoSchema } from "@/schemas/utxo";
 
+import { MOCK_ALKANE_BALANCE, MOCK_ALKANE_UTXO } from "tests/mocks/alkane";
 import { MOCK_BRC20_BALANCE, MOCK_BRC20_ACTIVITY } from "tests/mocks/brc20";
 import {
   MOCK_INSCRIPTION,
@@ -219,4 +221,36 @@ test("list all BRC-20 activity for address (with params)", async () => {
   });
 
   expect(activity.length).toBe(0);
+});
+
+test("list all alkane balances from address", async () => {
+  const ADDRESS =
+    "bc1pxaneaf3w4d27hl2y93fuft2xk6m4u3wc4rafevc6slgd7f5tq2dqyfgy06";
+
+  mock(`/address/${ADDRESS}/alkanes`)?.reply(200, {
+    data: [MOCK_ALKANE_BALANCE],
+  });
+
+  const alkaneBalances = await ordiscan.address.getAlkanes({
+    address: ADDRESS,
+  });
+
+  expect(alkaneBalances.length).toBeGreaterThan(0);
+  expect(AlkaneBalanceSchema.parse(alkaneBalances[0])).toBeTruthy();
+});
+
+test("list all alkane UTXOs from address", async () => {
+  const ADDRESS =
+    "bc1pr8vjq0fk89f5sw3r4n9scrasvw7kaud9akhzw57c3ygycsjspvvseyjcma";
+
+  mock(`/address/${ADDRESS}/utxos/alkanes`)?.reply(200, {
+    data: [MOCK_ALKANE_UTXO],
+  });
+
+  const alkaneUtxos = await ordiscan.address.getAlkaneUtxos({
+    address: ADDRESS,
+  });
+
+  expect(alkaneUtxos.length).toBeGreaterThan(0);
+  expect(AlkaneUtxoSchema.parse(alkaneUtxos[0])).toBeTruthy();
 });

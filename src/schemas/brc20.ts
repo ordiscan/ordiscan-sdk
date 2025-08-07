@@ -21,6 +21,8 @@ export type Brc20Token = z.infer<typeof Brc20TokenSchema>;
 export const Brc20BalanceSchema = z.object({
   tick: z.string(),
   balance: z.number(),
+  available_balance: z.number(),
+  transferrable_balance: z.number(),
 });
 
 export type Brc20Balance = z.infer<typeof Brc20BalanceSchema>;

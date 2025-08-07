@@ -1,6 +1,6 @@
 import { BaseResource } from "@/resources/base";
 
-import { Collection } from "@/schemas/collection";
+import { Collection, CollectionMarketInfo } from "@/schemas/collection";
 
 export class CollectionResource extends BaseResource {
   async list({
@@ -29,5 +29,9 @@ export class CollectionResource extends BaseResource {
 
   async getInscriptions({ slug }: { slug: string }) {
     return this.client.fetch<string[]>(`/collection/${slug}/inscriptions`);
+  }
+
+  async getMarketInfo({ slug }: { slug: string }): Promise<CollectionMarketInfo> {
+    return this.client.fetch<CollectionMarketInfo>(`/collection/${slug}/market`);
   }
 }

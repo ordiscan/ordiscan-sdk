@@ -10,6 +10,8 @@ export const MOCK_BRC20_INFO: Brc20Token = {
 export const MOCK_BRC20_BALANCE: Brc20Balance = {
   tick: "SATS",
   balance: 100000000,
+  available_balance: 90000000,
+  transferrable_balance: 10000000,
 };
 
 export const MOCK_BRC20_ACTIVITY: Brc20Activity = {

@@ -1,6 +1,6 @@
 import { expect, test } from "vitest";
 
-import { CollectionSchema } from "@/schemas/collection";
+import { CollectionSchema, CollectionMarketInfoSchema } from "@/schemas/collection";
 
 import { MOCK_COLLECTION } from "tests/mocks/collection";
 
@@ -45,4 +45,27 @@ test("get inscriptions IDs in collection", async () => {
 
   expect(inscriptionIds.length).toBeGreaterThan(0);
   expect(inscriptionIds[0]).toBeTypeOf("string");
+});
+
+test("get collection market info", async () => {
+  const mockMarketInfo = {
+    floor_price_in_sats: 4210950,
+    floor_price_in_usd: 4972,
+    market_cap_in_btc: 251.76,
+    market_cap_in_usd: 29727870,
+  };
+
+  mock(`/collection/bitcoin-puppets/market`)?.reply(200, {
+    data: mockMarketInfo,
+  });
+
+  const marketInfo = await ordiscan.collection.getMarketInfo({
+    slug: "bitcoin-puppets",
+  });
+
+  expect(CollectionMarketInfoSchema.parse(marketInfo)).toBeTruthy();
+  expect(marketInfo.floor_price_in_sats).toBe(4210950);
+  expect(marketInfo.floor_price_in_usd).toBe(4972);
+  expect(marketInfo.market_cap_in_btc).toBe(251.76);
+  expect(marketInfo.market_cap_in_usd).toBe(29727870);
 });

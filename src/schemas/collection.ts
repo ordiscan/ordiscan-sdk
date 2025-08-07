@@ -11,3 +11,12 @@ export const CollectionSchema = z.object({
 });
 
 export type Collection = z.infer<typeof CollectionSchema>;
+
+export const CollectionMarketInfoSchema = z.object({
+  floor_price_in_sats: z.number().nullable(),
+  floor_price_in_usd: z.number().nullable(),
+  market_cap_in_btc: z.number().nullable(),
+  market_cap_in_usd: z.number().nullable(),
+});
+
+export type CollectionMarketInfo = z.infer<typeof CollectionMarketInfoSchema>;

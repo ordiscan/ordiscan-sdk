@@ -2,6 +2,8 @@ import { Brc20Activity, Brc20Balance, Brc20Token } from "@/schemas/brc20";
 
 export const MOCK_BRC20_INFO: Brc20Token = {
   tick: "ORDI",
+  inscription_id:
+    "b61b0172d95e266c18aea0c624db987e971a5d6d4ebc2aaed85da4642d635735i0",
   max_supply: 21000000,
   minted: 21000000,
   price: 41.57,

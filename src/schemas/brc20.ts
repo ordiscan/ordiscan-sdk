@@ -10,6 +10,7 @@ export const Brc20ActionSchema = z.object({
 export const Brc20TokenSchema = z
   .object({
     tick: z.string(),
+    inscription_id: z.string().nullable(),
     minted: z.number(),
     max_supply: z.number(),
     price: z.number().nullable(),

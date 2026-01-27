@@ -36,3 +36,12 @@ export class ExampleResource extends BaseResource {
 
 - `@/*` maps to `src/*`
 - `tests/*` maps to `tests/*`
+
+## Releasing to NPM
+
+To publish a new version to NPM:
+
+1. Bump the version in `package.json`
+2. Commit and push to `main`
+
+The GitHub Action will automatically publish if the version is higher than what's currently on NPM. No git tag required.

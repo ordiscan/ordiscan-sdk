@@ -29,6 +29,12 @@ export type {
   RunicOutput,
   RunestoneMessage,
 } from "@/schemas/runicTx";
-export type { Sat, SatRange, Satribute, RareSatBalance } from "@/schemas/sat";
+export type {
+  Sat,
+  SatRange,
+  Satribute,
+  SatributeSlug,
+  RareSatBalance,
+} from "@/schemas/sat";
 export type { TxInfo } from "@/schemas/tx";
 export type { Utxo } from "@/schemas/utxo";

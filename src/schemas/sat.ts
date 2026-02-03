@@ -25,6 +25,15 @@ export const SatributeSchema = z.enum([
 
 export type Satribute = z.infer<typeof SatributeSchema>;
 
+// Derive slugs from SatributeSchema (e.g. BLACK_UNCOMMON -> black_uncommon)
+const satributeSlugs = SatributeSchema.options.map((s) =>
+  s.toLowerCase(),
+) as [string, ...string[]];
+
+export const SatributeSlugSchema = z.enum(satributeSlugs);
+
+export type SatributeSlug = z.infer<typeof SatributeSlugSchema>;
+
 export const SatSchema = z
   .object({
     sat_number: z.number(),

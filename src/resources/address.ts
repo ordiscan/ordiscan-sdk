@@ -47,10 +47,12 @@ export class AddressResource extends BaseResource {
     address,
     type,
     page,
+    sort,
   }: {
     address: string;
     type?: "transfer" | "inscribe";
     page?: number;
+    sort?: "newest" | "oldest";
   }) {
     let url = `/address/${address}/activity`;
 
@@ -62,6 +64,10 @@ export class AddressResource extends BaseResource {
 
     if (page) {
       params.append("page", page.toString());
+    }
+
+    if (sort) {
+      params.append("sort", sort);
     }
 
     if (params.size) {

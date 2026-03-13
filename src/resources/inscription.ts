@@ -50,9 +50,11 @@ export class InscriptionResource extends BaseResource {
   async getTransfers({
     inscriptionId,
     page,
+    sort,
   }: {
     inscriptionId: string;
     page?: number;
+    sort?: "newest" | "oldest";
   }): Promise<InscriptionTransfer[]> {
     let url = `/inscription/${inscriptionId}/activity`;
 
@@ -60,6 +62,10 @@ export class InscriptionResource extends BaseResource {
 
     if (page !== undefined) {
       params.append("page", page.toString());
+    }
+
+    if (sort) {
+      params.append("sort", sort);
     }
 
     if (params.size) {

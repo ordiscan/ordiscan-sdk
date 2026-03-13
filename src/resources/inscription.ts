@@ -2,6 +2,7 @@ import { BaseResource } from "@/resources/base";
 
 import { Inscription, InscriptionTrait } from "@/schemas/inscription";
 import { InscriptionTransfer } from "@/schemas/inscriptionTx";
+import { SatributeSlug } from "@/schemas/sat";
 
 export class InscriptionResource extends BaseResource {
   async getInfo(identifier: string | number): Promise<Inscription> {
@@ -12,10 +13,12 @@ export class InscriptionResource extends BaseResource {
     sort,
     before,
     after,
+    satribute,
   }: {
     sort?: "inscription_number_desc" | "inscription_number_asc";
     before?: number;
     after?: number;
+    satribute?: SatributeSlug;
   } = {}): Promise<Inscription[]> {
     let url = "/inscriptions";
 
@@ -31,6 +34,10 @@ export class InscriptionResource extends BaseResource {
 
     if (after !== undefined) {
       params.append("after", after.toString());
+    }
+
+    if (satribute) {
+      params.append("satribute", satribute);
     }
 
     if (params.size) {

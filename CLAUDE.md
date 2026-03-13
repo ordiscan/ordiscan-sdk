@@ -18,7 +18,7 @@ After implementing a feature, run `just lint` and `just test-once` to make sure 
 - **Resources**: `src/resources/` - API endpoint wrappers that extend `BaseResource`
   - Each resource (address, inscription, rune, etc.) corresponds to different API endpoints
   - Resources use the client's `fetch()` method for authenticated requests
-- **Schemas**: `src/schemas/` - Zod schemas for argument and response validation
+- **Schemas**: `src/schemas/` - Zod schemas for argument and response validation. Always define types using Zod schemas with `z.infer<>` (not plain TypeScript interfaces), since tests validate responses against them. New types must also be re-exported from `src/index.ts`.
 - **Types**: `src/types.ts` - Core types and error classes
 
 ### Resource Pattern

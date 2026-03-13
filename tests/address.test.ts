@@ -1,5 +1,6 @@
 import { expect, test } from "vitest";
 
+import { ActivityCheckSchema } from "@/schemas/activityCheck";
 import { AlkaneBalanceSchema, AlkaneUtxoSchema } from "@/schemas/alkane";
 import { Brc20ActivitySchema, Brc20BalanceSchema } from "@/schemas/brc20";
 import { InscriptionSchema } from "@/schemas/inscription";
@@ -221,6 +222,28 @@ test("list all BRC-20 activity for address (with params)", async () => {
   });
 
   expect(activity.length).toBe(0);
+});
+
+test("check activity for address", async () => {
+  const ADDRESS =
+    "bc1pxaneaf3w4d27hl2y93fuft2xk6m4u3wc4rafevc6slgd7f5tq2dqyfgy06";
+
+  mock(`/address/${ADDRESS}/activity/check`)?.reply(200, {
+    data: {
+      has_inscription_activity: true,
+      has_rune_activity: false,
+      has_brc20_activity: true,
+    },
+  });
+
+  const result = await ordiscan.address.getActivityCheck({
+    address: ADDRESS,
+  });
+
+  expect(ActivityCheckSchema.parse(result)).toBeTruthy();
+  expect(result.has_inscription_activity).toBe(true);
+  expect(result.has_rune_activity).toBe(false);
+  expect(result.has_brc20_activity).toBe(true);
 });
 
 test("list all alkane balances from address", async () => {

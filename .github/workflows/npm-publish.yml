@@ -15,6 +15,13 @@ jobs:
       - run: npm test
       - run: npm run build
       - uses: JS-DevTools/npm-publish@v3
+        id: publish
         with:
           token: ${{ secrets.NPM_AUTH_TOKEN }}
           strategy: upgrade
+      - name: Create git tag
+        if: steps.publish.outputs.type
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          git tag "v$VERSION"
+          git push origin "v$VERSION"
